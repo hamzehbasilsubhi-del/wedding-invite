@@ -116,9 +116,7 @@ body, html {
     color: var(--text-burgundy);
 }
 
-/* ----------------------------------------------------
-   البانر الرئيسي (HERO BANNER) مع الصورة والنص فوقها
----------------------------------------------------- */
+/* البانر الرئيسي */
 .hero-banner-section {
     position: relative;
     width: 100%;
@@ -131,7 +129,6 @@ body, html {
     padding: 40px 20px;
 }
 
-/* طبقة ظل ناعمة فوق الصورة لضمان وضوح النص */
 .hero-banner-section::before {
     content: '';
     position: absolute;
@@ -141,9 +138,9 @@ body, html {
     height: 100%;
     background: linear-gradient(
         to bottom,
-        rgba(255, 255, 255, 0.4) 0%,
-        rgba(255, 255, 255, 0.2) 40%,
-        rgba(255, 255, 255, 0.6) 100%
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.5) 100%
     );
     z-index: 1;
 }
@@ -189,11 +186,29 @@ body, html {
     font-weight: 600;
 }
 
-/* محتوى باقي الدعوة أسفل البانر */
+/* فاصل الورود الشفاف تحت البانر مباشرة */
+.flower-divider-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: -35px; /* لتداخل طفيف وأنيق مع البانر */
+    position: relative;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.flower-divider {
+    max-width: 380px;
+    width: 85%;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+}
+
+/* محتوى باقي الدعوة */
 .invitation-body {
     max-width: 500px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px 20px 40px 20px;
     text-align: center;
 }
 
@@ -267,7 +282,7 @@ body, html {
     margin-top: 4px;
 }
 
-/* بطاقات الفنادق والخدمات */
+/* البطاقات */
 .info-card {
     background: var(--card-bg);
     border: 1px solid var(--border-light);
@@ -322,7 +337,7 @@ body, html {
     font-size: 1rem;
 }
 
-/* زر الموسيقى العائم */
+/* زر الصوت العائم */
 #audio-toggle {
     position: fixed;
     bottom: 20px;
