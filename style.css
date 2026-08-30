@@ -6,7 +6,7 @@
     --text-burgundy: #5B2C38;
     --text-dark: #333333;
     --accent-gold: #C5A059;
-    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.92);
     --border-light: rgba(197, 160, 89, 0.3);
 }
 
@@ -186,12 +186,12 @@ body, html {
     font-weight: 600;
 }
 
-/* فاصل الورود الشفاف تحت البانر مباشرة */
+/* فاصل الورود الشفاف */
 .flower-divider-container {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: -35px; /* لتداخل طفيف وأنيق مع البانر */
+    margin-top: -35px;
     position: relative;
     z-index: 5;
     pointer-events: none;
@@ -204,7 +204,102 @@ body, html {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
 }
 
-/* محتوى باقي الدعوة */
+/* ----------------------------------------------------
+   قسم الترحيب المصمم خصيصاً بمحاكاة الصورة (JOIN US CARD)
+---------------------------------------------------- */
+.celebrate-card-wrapper {
+    max-width: 520px;
+    margin: 30px auto 10px auto;
+    padding: 0 15px;
+}
+
+.celebrate-card {
+    position: relative;
+    background: #FCFBF9;
+    border: 1px solid rgba(197, 160, 89, 0.25);
+    border-radius: 4px;
+    padding: 50px 45px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+/* الإطارات الزخرفية العمودية على الجانبين */
+.side-border {
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 32px;
+    pointer-events: none;
+    background-repeat: repeat-y;
+    background-size: contain;
+}
+
+.side-border.left {
+    left: 12px;
+    border-right: 2px double rgba(197, 160, 89, 0.5);
+    background-image: radial-gradient(circle at 50% 20px, rgba(197, 160, 89, 0.15) 2px, transparent 3px);
+}
+
+.side-border.right {
+    right: 12px;
+    border-left: 2px double rgba(197, 160, 89, 0.5);
+    background-image: radial-gradient(circle at 50% 20px, rgba(197, 160, 89, 0.15) 2px, transparent 3px);
+}
+
+.celebrate-title {
+    font-size: 2.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: var(--text-burgundy);
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.celebrate-divider-line {
+    width: 80px;
+    height: 1px;
+    background: var(--accent-gold);
+    margin: 0 auto 30px auto;
+    opacity: 0.6;
+}
+
+.celebrate-text {
+    font-size: 1.35rem;
+    font-family: 'Cormorant Garamond', serif;
+    color: #4A4A4A;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.celebrate-location-title {
+    font-size: 2.2rem;
+    color: var(--text-burgundy);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 15px;
+}
+
+.celebrate-venue-name {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.celebrate-venue-region {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.celebrate-time {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #555;
+}
+
+/* باقي عناصر الدعوة */
 .invitation-body {
     max-width: 500px;
     margin: 0 auto;
