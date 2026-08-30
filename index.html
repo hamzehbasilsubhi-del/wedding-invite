@@ -8,27 +8,38 @@
 </head>
 <body>
 
+    <!-- Canvas لتأثير تساقط البتلات -->
     <canvas id="petals-canvas"></canvas>
 
+    <!-- الستائر الجانبية الثابتة المتحركة مع التمرير -->
+    <div class="curtain curtain-left" id="curtain-left"></div>
+    <div class="curtain curtain-right" id="curtain-right"></div>
+
+    <!-- محول اللغات الثابت -->
     <div class="top-nav">
         <span>EN</span> | <span>ES</span>
     </div>
 
+    <!-- زر الصوت السفلي والموسيقى -->
     <button id="audio-toggle" onclick="toggleAudio()">🎵</button>
     <audio id="bg-music" src="music.mp3" loop></audio>
 
+    <!-- 1. الشاشة الأولى: المغلف والختم الشمعي -->
     <div id="cover-screen" class="screen">
         <button id="seal-button" onclick="startExperience()"></button>
     </div>
 
+    <!-- 2. الشاشة الثانية: الفيديو الانتقالي عند الفتح -->
     <div id="video-screen" class="screen">
         <video id="transition-video" playsinline>
             <source src="transition.mp4" type="video/mp4">
         </video>
     </div>
 
+    <!-- 3. الشاشة الثالثة: الدعوة كاملة -->
     <div id="invitation-screen" class="screen">
         
+        <!-- البانر الرئيسي -->
         <header class="hero-banner-section">
             <div class="hero-overlay-content">
                 <p class="hero-subtitle">THE WEDDING OF</p>
@@ -41,10 +52,12 @@
             </div>
         </header>
 
+        <!-- صورة الورود المفرغة تحت البانر الرئيسي -->
         <div class="flower-divider-container">
             <img src="flower-divider.png" alt="Flowers" class="flower-divider">
         </div>
 
+        <!-- بطاقة الترحيب -->
         <section class="celebrate-card-wrapper">
             <div class="celebrate-card">
                 <div class="side-border-img left"></div>
@@ -61,10 +74,10 @@
             </div>
         </section>
 
+        <!-- باقي تفاصيل الدعوة -->
         <div class="invitation-body">
-            
-            <a href="https://maps.google.com" target="_blank" class="btn-primary" style="margin-bottom: 30px;">📍 OPEN IN GOOGLE MAPS</a>
 
+            <!-- Countdown Timer -->
             <h2 class="section-title">العداد التنازلي</h2>
             <p class="section-subtitle">Until 27 July 2027</p>
             <div class="countdown-container">
@@ -74,12 +87,14 @@
                 <div class="time-box"><div class="number" id="seconds">00</div><div class="label">ثانية</div></div>
             </div>
 
+            <!-- Dress Code -->
             <h2 class="section-title">Dress Code</h2>
             <p class="section-subtitle">Formal Black-Tie</p>
             <p style="font-size: 1.05rem; color: #555; line-height: 1.7; max-width: 420px; margin: 0 auto;">
                 نرجو الالتزام بالزي الرسمي الأنيق. الألوان المقترحة: الأزرق السماوي، البيج، والدرجات الترابية الناعمة.
             </p>
 
+            <!-- Accommodations -->
             <h2 class="section-title">أين تقيم؟</h2>
             <p class="section-subtitle">Where to Stay</p>
             
@@ -95,6 +110,7 @@
                 <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
             </div>
 
+            <!-- RSVP Form -->
             <h2 class="section-title">تأكيد الحضور</h2>
             <p class="section-subtitle">RSVP</p>
             <form class="rsvp-form" onsubmit="event.preventDefault(); alert('شكراً لتأكيد حضورك!');">
@@ -149,7 +165,22 @@
             };
         }
 
-        // 2. التحكم بالصوت
+        // 2. انيميشن فتح الستائر عند التمرير للأسفل (Scroll Effect)
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const curtainLeft = document.getElementById('curtain-left');
+            const curtainRight = document.getElementById('curtain-right');
+            
+            // احتساب المسافة (كلما نزل المستخدم تحركت الستائر للخارج)
+            const moveDistance = Math.min(scrollTop * 0.4, 250); 
+            
+            if (curtainLeft && curtainRight) {
+                curtainLeft.style.transform = `translateX(-${moveDistance}px)`;
+                curtainRight.style.transform = `translateX(${moveDistance}px)`;
+            }
+        });
+
+        // 3. التحكم بالصوت
         function toggleAudio() {
             const music = document.getElementById('bg-music');
             if (music.paused) {
@@ -159,7 +190,7 @@
             }
         }
 
-        // 3. العداد التنازلي
+        // 4. العداد التنازلي
         const weddingDate = new Date('July 27, 2027 19:00:00').getTime();
         setInterval(function() {
             const now = new Date().getTime();
@@ -171,7 +202,7 @@
             document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
         }, 1000);
 
-        // 4. انيميشن تساقط البتلات على Canvas
+        // 5. انيميشن تساقط البتلات على Canvas
         const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
