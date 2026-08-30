@@ -3,71 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة زفاف</title>
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; background-color: #f5f2eb; overflow: hidden; font-family: sans-serif; }
-        
-        /* 1. الغلاف الثابت */
-        #cover-screen { width: 100%; height: 100%; background: url('cover.jpg') no-repeat center center/cover; position: absolute; z-index: 3; display: flex; justify-content: center; align-items: center; }
-        
-        /* الزر الشفاف المخفي فوق الختم */
-        #seal-button { width: 150px; height: 150px; background: transparent; border: none; cursor: pointer; border-radius: 50%; }
-        
-        /* 2. شاشة الفيديو */
-        #video-screen { width: 100%; height: 100%; position: absolute; z-index: 2; display: none; background: #fff; }
-        video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-        
-        /* 3. شاشة الدعوة الرئيسية */
-        #invitation-screen { width: 100%; min-height: 100%; position: absolute; z-index: 1; display: none; text-align: center; padding: 50px 20px; background-color: #f9f9f9; }
-    </style>
+    <title>دعوة زفاف لوسيا وماتيو</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- الشاشة الأولى: صورة الغلاف والختم -->
-    <div id="cover-screen">
+    <!-- Canvas لتأثير تساقط البتلات والنجوم -->
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- محول اللغات الثابت -->
+    <div class="top-nav">
+        <span>EN</span> | <span>ES</span>
+    </div>
+
+    <!-- زر الصوت السفلي -->
+    <button id="audio-toggle" onclick="toggleAudio()">🎵</button>
+    <audio id="bg-music" src="music.mp3" loop></audio>
+
+    <!-- 1. الشاشة الأولى: المغلف والختم -->
+    <div id="cover-screen" class="screen">
         <button id="seal-button" onclick="startExperience()"></button>
     </div>
 
-    <!-- الشاشة الثانية: فيديو فتح المغلف -->
-    <div id="video-screen">
+    <!-- 2. الشاشة الثانية: الفيديو الانتقالي -->
+    <div id="video-screen" class="screen">
         <video id="transition-video" playsinline>
             <source src="transition.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- الشاشة الثالثة: محتوى الدعوة (الذي سنصممه لاحقاً) -->
-    <div id="invitation-screen">
-        <h1 style="color: #2C3E50; margin-bottom: 20px;">أهلاً بكم في زفافنا</h1>
-        <p>هنا سنقوم ببناء تفاصيل الدعوة، العداد التنازلي، والخرائط خطوة بخطوة...</p>
+    <!-- 3. الشاشة الثالثة: الدعوة كاملة -->
+    <div id="invitation-screen" class="screen">
+        <div class="container">
+            
+            <!-- Hero Section -->
+            <p class="hero-subtitle">THE WEDDING OF</p>
+            <h1 class="hero-names">Lucia <span>&</span> Matteo</h1>
+            <p class="hero-date-location">27 JULY 2027<br>Château de la Couronne<br>Nouvelle-Aquitaine, France</p>
+
+            <!-- القصر / الصورة -->
+            <img src="cover.jpg" alt="Château" class="castle-illustration">
+
+            <!-- Welcome Message -->
+            <h2 class="section-title">Join Us To Celebrate</h2>
+            <p class="section-subtitle">Our Wedding</p>
+            <p style="font-size: 1.15rem; color: #555;">يسرنا جداً مشاركتكم هذه اللحظات الاستثنائية والاحتفال معنا بهذا اليوم السعيد.</p>
+
+            <!-- Time & Location -->
+            <h2 class="section-title">الوقت والموقع</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 10px;">Château de la Couronne, France</p>
+            <p style="color: #666; margin-bottom: 15px;">7:00 مساءً</p>
+            <a href="https://maps.google.com" target="_blank" class="btn-primary">📍 OPEN IN GOOGLE MAPS</a>
+
+            <!-- Countdown Timer -->
+            <h2 class="section-title">العداد التنازلي</h2>
+            <p class="section-subtitle">Until 27 July 2027</p>
+            <div class="countdown-container">
+                <div class="time-box"><div class="number" id="days">00</div><div class="label">يوم</div></div>
+                <div class="time-box"><div class="number" id="hours">00</div><div class="label">ساعة</div></div>
+                <div class="time-box"><div class="number" id="minutes">00</div><div class="label">دقيقة</div></div>
+                <div class="time-box"><div class="number" id="seconds">00</div><div class="label">ثانية</div></div>
+            </div>
+
+            <!-- Dress Code -->
+            <h2 class="section-title">Dress Code</h2>
+            <p class="section-subtitle">Formal Black-Tie</p>
+            <p style="font-size: 1.05rem; color: #555; line-height: 1.7; max-width: 420px; margin: 0 auto;">
+                نرجو الالتزام بالزي الرسمي الأنيق. الألوان المقترحة: الأزرق السماوي، البيج، والدرجات الترابية الناعمة.
+            </p>
+
+            <!-- Accommodations / Where to Stay -->
+            <h2 class="section-title">أين تقيم؟</h2>
+            <p class="section-subtitle">Where to Stay</p>
+            
+            <div class="info-card">
+                <h4>Domaine des Etangs, Auberge</h4>
+                <p>📍 20 min drive • Massignac</p>
+                <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
+            </div>
+
+            <div class="info-card">
+                <h4>Chais Monnet Hôtel & Spa</h4>
+                <p>📍 45 min drive • Cognac</p>
+                <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
+            </div>
+
+            <!-- RSVP Form -->
+            <h2 class="section-title">تأكيد الحضور</h2>
+            <p class="section-subtitle">RSVP</p>
+            <form class="rsvp-form" onsubmit="event.preventDefault(); alert('شكراً لتأكيد حضورك!');">
+                <div class="form-group">
+                    <label>هل ستنضم إلينا؟ *</label>
+                    <select class="form-control" required>
+                        <option value="">اختر الإجابة</option>
+                        <option value="yes">نعم، يشرفني الحضور</option>
+                        <option value="no">أعتذر عن الحضور</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الاسم الكامل *</label>
+                    <input type="text" class="form-control" placeholder="اكتب اسمك هنا" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" class="form-control" placeholder="example@domain.com">
+                </div>
+                <div class="form-group">
+                    <label>ملاحظات غذائية أو حساسيات طعام</label>
+                    <input type="text" class="form-control" placeholder="مثل: نباتي، خالي من الجلوتين...">
+                </div>
+                <div class="form-group">
+                    <label>رسالة للعروسين</label>
+                    <textarea class="form-control" rows="3" placeholder="اكتب تهنئتك هنا..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">إرسال التأكيد</button>
+            </form>
+
+        </div>
     </div>
 
-    <!-- الموسيقى الخلفية -->
-    <audio id="bg-music" src="music.mp3" loop></audio>
-
     <script>
+        // 1. تجربة الفتح والفيديو
         function startExperience() {
-            // إخفاء صورة الغلاف
             document.getElementById('cover-screen').style.display = 'none';
-            
-            // تجهيز الفيديو والموسيقى
             const videoScreen = document.getElementById('video-screen');
             const video = document.getElementById('transition-video');
             const music = document.getElementById('bg-music');
             
-            // عرض وتشغيل الفيديو والموسيقى
             videoScreen.style.display = 'block';
             video.play();
-            music.play();
+            music.play().catch(() => {});
 
-            // عند انتهاء الفيديو، يتم إخفاؤه وتظهر الدعوة
             video.onended = function() {
                 videoScreen.style.display = 'none';
                 const invScreen = document.getElementById('invitation-screen');
                 invScreen.style.display = 'block';
-                // السماح بالتمرير (Scroll) في صفحة الدعوة
+                setTimeout(() => invScreen.classList.add('visible'), 50);
                 document.body.style.overflow = 'auto';
             };
         }
+
+        // 2. التحكم في الصوت
+        function toggleAudio() {
+            const music = document.getElementById('bg-music');
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        // 3. العداد التنازلي
+        const weddingDate = new Date('July 27, 2027 19:00:00').getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+
+        // 4. محاكاة تساقط البتلات والنجوم على Canvas
+        const canvas = document.getElementById('petals-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = Array.from({ length: 25 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: Math.random() * 5 + 3,
+            speedY: Math.random() * 0.8 + 0.3,
+            speedX: Math.sin(Math.random()) * 0.5,
+            opacity: Math.random() * 0.6 + 0.2
+        }));
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                if (p.y > height) p.y = -10;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(162, 185, 200, ${p.opacity})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animatePetals);
+        }
+        animatePetals();
     </script>
 </body>
 </html>
