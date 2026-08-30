@@ -1,191 +1,204 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة زفاف لوسيا وماتيو</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Wedding of Lucia & Matteo</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      color: #ffffff;
+      background-color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* Hero Banner Container */
+    .hero-banner {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+      /* استبدل الرابط أدناه بمسار الصورة الخاصة بك */
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Overlay Layer for Text Readability */
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0.45) 50%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Content Overlay */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    /* Typography */
+    .subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .names {
+      font-size: 3.5rem;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    .ampersand {
+      font-style: italic;
+      font-size: 2rem;
+      margin: 0.2rem 0;
+      opacity: 0.85;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .date-location {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .venue {
+      font-size: 1.35rem;
+      font-weight: 400;
+      opacity: 0.95;
+    }
+
+    .location {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      font-style: italic;
+    }
+
+    /* Floating Music Button Concept */
+    .music-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      z-index: 10;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 480px) {
+      .names {
+        font-size: 2.75rem;
+      }
+      .venue {
+        font-size: 1.2rem;
+      }
+      .date {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <canvas id="petals-canvas"></canvas>
+  <header class="hero-banner">
+    <div class="lang-switcher">ES | EN</div>
 
-    <div class="top-nav">
-        <span>EN</span> | <span>ES</span>
+    <div class="hero-content">
+      <p class="subtitle">The Wedding Of</p>
+      
+      <h1 class="names">Lucia</h1>
+      <span class="ampersand">&amp;</span>
+      <h1 class="names">Matteo</h1>
+
+      <div class="date-location">
+        <p class="date">27 July 2027</p>
+        <p class="venue">Château de la Couronne</p>
+        <p class="location">Nouvelle-Aquitaine, France</p>
+      </div>
     </div>
 
-    <button id="audio-toggle" onclick="toggleAudio()">🎵</button>
-    <audio id="bg-music" src="music.mp3" loop></audio>
+    <button class="music-btn" aria-label="Toggle Music">
+      🎵
+    </button>
+  </header>
 
-    <div id="cover-screen" class="screen">
-        <button id="seal-button" onclick="startExperience()"></button>
-    </div>
-
-    <div id="video-screen" class="screen">
-        <video id="transition-video" playsinline>
-            <source src="transition.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <div id="invitation-screen" class="screen">
-        <div class="container">
-            
-            <p class="hero-subtitle">THE WEDDING OF</p>
-            <h1 class="hero-names">Lucia <span>&</span> Matteo</h1>
-            <p class="hero-date-location">27 JULY 2027<br>Château de la Couronne<br>Nouvelle-Aquitaine, France</p>
-
-            <img src="hero-banner.jpg" alt="Château de la Couronne" class="castle-illustration">
-
-            <h2 class="section-title">Join Us To Celebrate</h2>
-            <p class="section-subtitle">Our Wedding</p>
-            <p style="font-size: 1.15rem; color: #555;">يسرنا جداً مشاركتكم هذه اللحظات الاستثنائية والاحتفال معنا بهذا اليوم السعيد.</p>
-
-            <h2 class="section-title">الوقت والموقع</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 10px;">Château de la Couronne, France</p>
-            <p style="color: #666; margin-bottom: 15px;">7:00 مساءً</p>
-            <a href="https://maps.google.com" target="_blank" class="btn-primary">📍 OPEN IN GOOGLE MAPS</a>
-
-            <h2 class="section-title">العداد التنازلي</h2>
-            <p class="section-subtitle">Until 27 July 2027</p>
-            <div class="countdown-container">
-                <div class="time-box"><div class="number" id="days">00</div><div class="label">يوم</div></div>
-                <div class="time-box"><div class="number" id="hours">00</div><div class="label">ساعة</div></div>
-                <div class="time-box"><div class="number" id="minutes">00</div><div class="label">دقيقة</div></div>
-                <div class="time-box"><div class="number" id="seconds">00</div><div class="label">ثانية</div></div>
-            </div>
-
-            <h2 class="section-title">Dress Code</h2>
-            <p class="section-subtitle">Formal Black-Tie</p>
-            <p style="font-size: 1.05rem; color: #555; line-height: 1.7; max-width: 420px; margin: 0 auto;">
-                نرجو الالتزام بالزي الرسمي الأنيق. الألوان المقترحة: الأزرق السماوي، البيج، والدرجات الترابية الناعمة.
-            </p>
-
-            <h2 class="section-title">أين تقيم؟</h2>
-            <p class="section-subtitle">Where to Stay</p>
-            
-            <div class="info-card">
-                <h4>Domaine des Etangs, Auberge</h4>
-                <p>📍 20 min drive • Massignac</p>
-                <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
-            </div>
-
-            <div class="info-card">
-                <h4>Chais Monnet Hôtel & Spa</h4>
-                <p>📍 45 min drive • Cognac</p>
-                <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
-            </div>
-
-            <h2 class="section-title">تأكيد الحضور</h2>
-            <p class="section-subtitle">RSVP</p>
-            <form class="rsvp-form" onsubmit="event.preventDefault(); alert('شكراً لتأكيد حضورك!');">
-                <div class="form-group">
-                    <label>هل ستنضم إلينا؟ *</label>
-                    <select class="form-control" required>
-                        <option value="">اختر الإجابة</option>
-                        <option value="yes">نعم، يشرفني الحضور</option>
-                        <option value="no">أعتذر عن الحضور</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>الاسم الكامل *</label>
-                    <input type="text" class="form-control" placeholder="اكتب اسمك هنا" required>
-                </div>
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" class="form-control" placeholder="example@domain.com">
-                </div>
-                <div class="form-group">
-                    <label>ملاحظات غذائية أو حساسيات طعام</label>
-                    <input type="text" class="form-control" placeholder="مثل: نباتي، خالي من الجلوتين...">
-                </div>
-                <div class="form-group">
-                    <label>رسالة للعروسين</label>
-                    <textarea class="form-control" rows="3" placeholder="اكتب تهنئتك هنا..."></textarea>
-                </div>
-                <button type="submit" class="btn-primary" style="width: 100%;">إرسال التأكيد</button>
-            </form>
-
-        </div>
-    </div>
-
-    <script>
-        // 1. تجربة الفتح والفيديو
-        function startExperience() {
-            document.getElementById('cover-screen').style.display = 'none';
-            const videoScreen = document.getElementById('video-screen');
-            const video = document.getElementById('transition-video');
-            const music = document.getElementById('bg-music');
-            
-            videoScreen.style.display = 'block';
-            video.play();
-            music.play().catch(() => {});
-
-            video.onended = function() {
-                videoScreen.style.display = 'none';
-                const invScreen = document.getElementById('invitation-screen');
-                invScreen.style.display = 'block';
-                setTimeout(() => invScreen.classList.add('visible'), 50);
-                document.body.style.overflow = 'auto';
-            };
-        }
-
-        // 2. التحكم في الصوت
-        function toggleAudio() {
-            const music = document.getElementById('bg-music');
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
-        }
-
-        // 3. العداد التنازلي
-        const weddingDate = new Date('July 27, 2027 19:00:00').getTime();
-        setInterval(function() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
-        }, 1000);
-
-        // 4. تساقط البتلات على Canvas
-        const canvas = document.getElementById('petals-canvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        const particles = Array.from({ length: 25 }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            size: Math.random() * 5 + 3,
-            speedY: Math.random() * 0.8 + 0.3,
-            speedX: Math.sin(Math.random()) * 0.5,
-            opacity: Math.random() * 0.6 + 0.2
-        }));
-
-        function animatePetals() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.y += p.speedY;
-                p.x += p.speedX;
-                if (p.y > height) p.y = -10;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(162, 185, 200, ${p.opacity})`;
-                ctx.fill();
-            });
-            requestAnimationFrame(animatePetals);
-        }
-        animatePetals();
-    </script>
 </body>
 </html>
