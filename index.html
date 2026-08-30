@@ -8,38 +8,27 @@
 </head>
 <body>
 
-    <!-- Canvas لتأثير تساقط البتلات -->
     <canvas id="petals-canvas"></canvas>
 
-    <!-- الستائر الجانبية الثابتة المتحركة مع التمرير -->
-    <div class="curtain curtain-left" id="curtain-left"></div>
-    <div class="curtain curtain-right" id="curtain-right"></div>
-
-    <!-- محول اللغات الثابت -->
     <div class="top-nav">
         <span>EN</span> | <span>ES</span>
     </div>
 
-    <!-- زر الصوت السفلي والموسيقى -->
     <button id="audio-toggle" onclick="toggleAudio()">🎵</button>
     <audio id="bg-music" src="music.mp3" loop></audio>
 
-    <!-- 1. الشاشة الأولى: المغلف والختم الشمعي -->
     <div id="cover-screen" class="screen">
         <button id="seal-button" onclick="startExperience()"></button>
     </div>
 
-    <!-- 2. الشاشة الثانية: الفيديو الانتقالي عند الفتح -->
     <div id="video-screen" class="screen">
         <video id="transition-video" playsinline>
             <source src="transition.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- 3. الشاشة الثالثة: الدعوة كاملة -->
     <div id="invitation-screen" class="screen">
         
-        <!-- البانر الرئيسي -->
         <header class="hero-banner-section">
             <div class="hero-overlay-content">
                 <p class="hero-subtitle">THE WEDDING OF</p>
@@ -52,12 +41,10 @@
             </div>
         </header>
 
-        <!-- صورة الورود المفرغة تحت البانر الرئيسي -->
         <div class="flower-divider-container">
             <img src="flower-divider.png" alt="Flowers" class="flower-divider">
         </div>
 
-        <!-- بطاقة الترحيب -->
         <section class="celebrate-card-wrapper">
             <div class="celebrate-card">
                 <div class="side-border-img left"></div>
@@ -74,27 +61,29 @@
             </div>
         </section>
 
-        <!-- باقي تفاصيل الدعوة -->
         <div class="invitation-body">
 
-            <!-- Countdown Timer -->
-            <h2 class="section-title">العداد التنازلي</h2>
-            <p class="section-subtitle">Until 27 July 2027</p>
-            <div class="countdown-container">
-                <div class="time-box"><div class="number" id="days">00</div><div class="label">يوم</div></div>
-                <div class="time-box"><div class="number" id="hours">00</div><div class="label">ساعة</div></div>
-                <div class="time-box"><div class="number" id="minutes">00</div><div class="label">دقيقة</div></div>
-                <div class="time-box"><div class="number" id="seconds">00</div><div class="label">ثانية</div></div>
+            <div class="countdown-section-wrapper" id="countdown-section">
+                <div class="curtain curtain-left" id="curtain-left"></div>
+                <div class="curtain curtain-right" id="curtain-right"></div>
+
+                <h2 class="section-title">العداد التنازلي</h2>
+                <p class="section-subtitle">Until 27 July 2027</p>
+                
+                <div class="countdown-container">
+                    <div class="time-box"><div class="number" id="days">00</div><div class="label">يوم</div></div>
+                    <div class="time-box"><div class="number" id="hours">00</div><div class="label">ساعة</div></div>
+                    <div class="time-box"><div class="number" id="minutes">00</div><div class="label">دقيقة</div></div>
+                    <div class="time-box"><div class="number" id="seconds">00</div><div class="label">ثانية</div></div>
+                </div>
             </div>
 
-            <!-- Dress Code -->
             <h2 class="section-title">Dress Code</h2>
             <p class="section-subtitle">Formal Black-Tie</p>
             <p style="font-size: 1.05rem; color: #555; line-height: 1.7; max-width: 420px; margin: 0 auto;">
                 نرجو الالتزام بالزي الرسمي الأنيق. الألوان المقترحة: الأزرق السماوي، البيج، والدرجات الترابية الناعمة.
             </p>
 
-            <!-- Accommodations -->
             <h2 class="section-title">أين تقيم؟</h2>
             <p class="section-subtitle">Where to Stay</p>
             
@@ -110,7 +99,6 @@
                 <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
             </div>
 
-            <!-- RSVP Form -->
             <h2 class="section-title">تأكيد الحضور</h2>
             <p class="section-subtitle">RSVP</p>
             <form class="rsvp-form" onsubmit="event.preventDefault(); alert('شكراً لتأكيد حضورك!');">
@@ -165,18 +153,24 @@
             };
         }
 
-        // 2. انيميشن فتح الستائر عند التمرير للأسفل (Scroll Effect)
+        // 2. انيميشن فتح الستائر عند الوصول لقسم العداد التنازلي
         window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const section = document.getElementById('countdown-section');
             const curtainLeft = document.getElementById('curtain-left');
             const curtainRight = document.getElementById('curtain-right');
             
-            // احتساب المسافة (كلما نزل المستخدم تحركت الستائر للخارج)
-            const moveDistance = Math.min(scrollTop * 0.4, 250); 
-            
-            if (curtainLeft && curtainRight) {
-                curtainLeft.style.transform = `translateX(-${moveDistance}px)`;
-                curtainRight.style.transform = `translateX(${moveDistance}px)`;
+            if (section && curtainLeft && curtainRight) {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // حساب بداية ونهاية الظهور بالنسبة للشاشة
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+                    const moveDistance = Math.min(Math.max(progress * 160 - 20, 0), 100); 
+                    
+                    curtainLeft.style.transform = `translateX(-${moveDistance}px)`;
+                    curtainRight.style.transform = `translateX(${moveDistance}px)`;
+                }
             }
         });
 

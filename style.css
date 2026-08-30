@@ -36,31 +36,6 @@ body, html {
     z-index: 10;
 }
 
-/* تصميم الستائر الجانبية */
-.curtain {
-    position: fixed;
-    top: 0;
-    height: 100vh;
-    width: 180px;
-    z-index: 20;
-    pointer-events: none;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: transform 0.1s ease-out;
-}
-
-.curtain-left {
-    left: 0;
-    background-image: url('curtain-left.png');
-    background-position: left top;
-}
-
-.curtain-right {
-    right: 0;
-    background-image: url('curtain-right.png');
-    background-position: right top;
-}
-
 /* إدارة الشاشات */
 .screen {
     width: 100%;
@@ -342,34 +317,47 @@ body, html {
     margin-bottom: 25px;
 }
 
-.btn-primary {
-    display: inline-block;
-    padding: 12px 28px;
-    border: 1px solid var(--accent-gold);
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--text-dark);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    margin-top: 15px;
+/* ----------------------------------------------------
+   تخصيص الستائر لقسم العداد التنازلي فقط
+---------------------------------------------------- */
+.countdown-section-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 30px 10px;
+    margin: 20px 0;
 }
 
-.btn-primary:hover {
-    background: var(--text-burgundy);
-    color: #fff;
-    border-color: var(--text-burgundy);
+.curtain {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 90px; /* مقاس مصغر يناسب قسم العداد */
+    z-index: 15;
+    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.1s ease-out;
+}
+
+.curtain-left {
+    left: 0;
+    background-image: url('curtain-left.png');
+    background-position: left center;
+}
+
+.curtain-right {
+    right: 0;
+    background-image: url('curtain-right.png');
+    background-position: right center;
 }
 
 .countdown-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin: 30px 0;
+    gap: 12px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 5;
 }
 
 .time-box {
@@ -394,6 +382,29 @@ body, html {
     color: #888;
     text-transform: uppercase;
     margin-top: 4px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid var(--accent-gold);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-dark);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn-primary:hover {
+    background: var(--text-burgundy);
+    color: #fff;
+    border-color: var(--text-burgundy);
 }
 
 .info-card {
