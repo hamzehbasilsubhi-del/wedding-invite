@@ -205,7 +205,7 @@ body, html {
 }
 
 /* ----------------------------------------------------
-   قسم الترحيب المصمم خصيصاً بمحاكاة الصورة (JOIN US CARD)
+   قسم الترحيب مع استخدام صورة الإطار frame-border.png
 ---------------------------------------------------- */
 .celebrate-card-wrapper {
     max-width: 520px;
@@ -218,33 +218,32 @@ body, html {
     background: #FCFBF9;
     border: 1px solid rgba(197, 160, 89, 0.25);
     border-radius: 4px;
-    padding: 50px 45px;
+    padding: 50px 55px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
     overflow: hidden;
 }
 
-/* الإطارات الزخرفية العمودية على الجانبين */
-.side-border {
+/* استخدام صورة frame-border.png على الطرفين الأيسر والأيمن */
+.side-border-img {
     position: absolute;
-    top: 12px;
-    bottom: 12px;
-    width: 32px;
+    top: 15px;
+    bottom: 15px;
+    width: 30px;
     pointer-events: none;
+    background-image: url('frame-border.png');
     background-repeat: repeat-y;
     background-size: contain;
+    background-position: center;
 }
 
-.side-border.left {
+.side-border-img.left {
     left: 12px;
-    border-right: 2px double rgba(197, 160, 89, 0.5);
-    background-image: radial-gradient(circle at 50% 20px, rgba(197, 160, 89, 0.15) 2px, transparent 3px);
 }
 
-.side-border.right {
+.side-border-img.right {
     right: 12px;
-    border-left: 2px double rgba(197, 160, 89, 0.5);
-    background-image: radial-gradient(circle at 50% 20px, rgba(197, 160, 89, 0.15) 2px, transparent 3px);
+    transform: scaleX(-1); /* عكس الصورة للجهة اليمنى للحفاظ على التناظر */
 }
 
 .celebrate-title {
