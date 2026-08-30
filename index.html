@@ -8,43 +8,52 @@
 </head>
 <body>
 
+    <!-- Canvas لتأثير تساقط البتلات -->
     <canvas id="petals-canvas"></canvas>
 
+    <!-- محول اللغات الثابت -->
     <div class="top-nav">
         <span>EN</span> | <span>ES</span>
     </div>
 
+    <!-- زر الصوت السفلي والموسيقى -->
     <button id="audio-toggle" onclick="toggleAudio()">🎵</button>
     <audio id="bg-music" src="music.mp3" loop></audio>
 
+    <!-- 1. الشاشة الأولى: المغلف والختم الشمعي -->
     <div id="cover-screen" class="screen">
         <button id="seal-button" onclick="startExperience()"></button>
     </div>
 
+    <!-- 2. الشاشة الثانية: الفيديو الانتقالي عند الفتح -->
     <div id="video-screen" class="screen">
         <video id="transition-video" playsinline>
             <source src="transition.mp4" type="video/mp4">
         </video>
     </div>
 
+    <!-- 3. الشاشة الثالثة: الدعوة كاملة -->
     <div id="invitation-screen" class="screen">
         
+        <!-- البانر الرئيسي -->
         <header class="hero-banner-section">
             <div class="hero-overlay-content">
                 <p class="hero-subtitle">THE WEDDING OF</p>
                 <h1 class="hero-names">Lucia <span>&</span> Matteo</h1>
                 <p class="hero-date-location">
                     27 JULY 2027<br>
-                    Château de la Couronne<br>
-                    Nouvelle-Aquitaine, France
+                    Voco Riyadh Banquet Hall<br>
+                    Riyadh, Saudi Arabia
                 </p>
             </div>
         </header>
 
+        <!-- صورة الورود المفرغة تحت البانر الرئيسي -->
         <div class="flower-divider-container">
             <img src="flower-divider.png" alt="Flowers" class="flower-divider">
         </div>
 
+        <!-- بطاقة الترحيب -->
         <section class="celebrate-card-wrapper">
             <div class="celebrate-card">
                 <div class="side-border-img left"></div>
@@ -55,50 +64,88 @@
                 <p class="celebrate-text">We are so excited to celebrate this<br>special day with you.</p>
 
                 <h3 class="celebrate-location-title">Time & Location</h3>
-                <p class="celebrate-venue-name">Château de la Couronne,</p>
-                <p class="celebrate-venue-region">Nouvelle-Aquitaine, France</p>
+                <p class="celebrate-venue-name">Voco Riyadh Banquet Hall,</p>
+                <p class="celebrate-venue-region">An Namudhajiyah, Saudi Arabia, Riyadh</p>
                 <p class="celebrate-time">7:00 PM</p>
             </div>
         </section>
 
+        <!-- باقي تفاصيل الدعوة -->
         <div class="invitation-body">
 
+            <!-- قسم موقع الحفل منفصل أعلى العداد التنازلي -->
+            <section class="venue-location-section">
+                <h2 class="section-title">موقع الحفل</h2>
+                <p class="section-subtitle" style="font-size: 1.4rem; font-style: normal; font-weight: 600; color: var(--text-burgundy); margin-bottom: 4px;">Voco Riyadh Banquet Hall</p>
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: #666; letter-spacing: 0.5px;">An Namudhajiyah , Saudi Arabia, Riyadh</p>
+
+                <!-- مجسم الفندق المرفق -->
+                <img src="voco-building.png" alt="Voco Riyadh Hotel Building" class="venue-building-img">
+
+                <!-- خريطة تفاعلية لقاعة فوكو الرياض -->
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.9392873155793!2d46.681144!3d24.694602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f033100236a6b%3A0x6d9f96b79c3d4e0!2svoco%20Riyadh!5e0!3m2!1sen!2ssa!4v1700000000000!5m2!1sen!2ssa" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- قسم العداد التنازلي المصمم بنفس طريقة الفيديو -->
             <div class="countdown-section-wrapper" id="countdown-section">
+                <!-- الستائر الجانبية لقسم العداد -->
                 <div class="curtain curtain-left" id="curtain-left"></div>
                 <div class="curtain curtain-right" id="curtain-right"></div>
 
-                <h2 class="section-title">العداد التنازلي</h2>
-                <p class="section-subtitle">Until 27 July 2027</p>
+                <h2 class="section-title">Countdown</h2>
+                <p class="section-subtitle">• Until 27 July 2027 •</p>
                 
                 <div class="countdown-container">
-                    <div class="time-box"><div class="number" id="days">00</div><div class="label">يوم</div></div>
-                    <div class="time-box"><div class="number" id="hours">00</div><div class="label">ساعة</div></div>
-                    <div class="time-box"><div class="number" id="minutes">00</div><div class="label">دقيقة</div></div>
-                    <div class="time-box"><div class="number" id="seconds">00</div><div class="label">ثانية</div></div>
+                    <div class="time-box">
+                        <div class="number" id="days">00</div>
+                        <div class="label">DAYS</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="number" id="hours">00</div>
+                        <div class="label">HOURS</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="number" id="minutes">00</div>
+                        <div class="label">MINUTES</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="number" id="seconds">00</div>
+                        <div class="label">SECONDS</div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Dress Code -->
             <h2 class="section-title">Dress Code</h2>
             <p class="section-subtitle">Formal Black-Tie</p>
             <p style="font-size: 1.05rem; color: #555; line-height: 1.7; max-width: 420px; margin: 0 auto;">
                 نرجو الالتزام بالزي الرسمي الأنيق. الألوان المقترحة: الأزرق السماوي، البيج، والدرجات الترابية الناعمة.
             </p>
 
+            <!-- Accommodations -->
             <h2 class="section-title">أين تقيم؟</h2>
             <p class="section-subtitle">Where to Stay</p>
             
             <div class="info-card">
-                <h4>Domaine des Etangs, Auberge</h4>
-                <p>📍 20 min drive • Massignac</p>
-                <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
+                <h4>Voco Riyadh Hotel</h4>
+                <p>📍 King Fahd Road • An Namudhajiyah</p>
+                <a href="https://maps.google.com" target="_blank" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
             </div>
 
             <div class="info-card">
-                <h4>Chais Monnet Hôtel & Spa</h4>
-                <p>📍 45 min drive • Cognac</p>
-                <a href="#" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
+                <h4>Riyadh Marriott Hotel</h4>
+                <p>📍 10 min drive • Al Maather</p>
+                <a href="https://maps.google.com" target="_blank" class="btn-primary" style="margin-top: 10px; font-size: 0.65rem;">VIEW HOTEL</a>
             </div>
 
+            <!-- RSVP Form -->
             <h2 class="section-title">تأكيد الحضور</h2>
             <p class="section-subtitle">RSVP</p>
             <form class="rsvp-form" onsubmit="event.preventDefault(); alert('شكراً لتأكيد حضورك!');">
@@ -153,18 +200,21 @@
             };
         }
 
-        // 2. انيميشن فتح الستائر عند الوصول لقسم العداد التنازلي
+        // 2. تفاعل الستائر وظهور قسم العداد بشكل تدريجي ناعم عند التمرير (Scroll)
         window.addEventListener('scroll', function() {
             const section = document.getElementById('countdown-section');
             const curtainLeft = document.getElementById('curtain-left');
             const curtainRight = document.getElementById('curtain-right');
             
-            if (section && curtainLeft && curtainRight) {
+            if (section) {
                 const rect = section.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
                 
-                // حساب بداية ونهاية الظهور بالنسبة للشاشة
-                if (rect.top < windowHeight && rect.bottom > 0) {
+                if (rect.top < windowHeight * 0.85) {
+                    section.classList.add('reveal-visible');
+                }
+
+                if (curtainLeft && curtainRight && rect.top < windowHeight && rect.bottom > 0) {
                     const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
                     const moveDistance = Math.min(Math.max(progress * 160 - 20, 0), 100); 
                     
@@ -184,19 +234,26 @@
             }
         }
 
-        // 4. العداد التنازلي
+        // 4. حساب العداد التنازلي وتحديثه تلقائياً
         const weddingDate = new Date('July 27, 2027 19:00:00').getTime();
         setInterval(function() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
-            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60)) / (1000 * 60));
-            document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            if (distance > 0) {
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+            }
         }, 1000);
 
-        // 5. انيميشن تساقط البتلات على Canvas
+        // 5. أنيميشن تساقط البتلات على Canvas
         const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
