@@ -177,34 +177,54 @@
     </div>
 
     <script>
-        // Start Experience & Play Music on Touch
+        // Start Experience & Play Music without White Flash
         function startExperience() {
             const music = document.getElementById('bg-music');
-            if (music) {
-                music.muted = false;
-                music.play().then(() => {
-                    console.log("Audio playing");
-                }).catch(error => {
-                    console.log("Audio playback error:", error);
-                });
-            }
-
-            document.getElementById('cover-screen').style.display = 'none';
+            const coverScreen = document.getElementById('cover-screen');
             const videoScreen = document.getElementById('video-screen');
             const video = document.getElementById('transition-video');
-            
+            const invScreen = document.getElementById('invitation-screen');
+
+            // 1. تشغيل الموسيقى فوراً عند اللمس
+            if (music) {
+                music.muted = false;
+                music.play().catch(error => console.log("Audio play error:", error));
+            }
+
+            // 2. إظهار حاوي الفيديو في الخلفية أولاً
             videoScreen.style.display = 'block';
-            if (video) video.play().catch(e => console.log(e));
 
             function revealInvitation() {
                 videoScreen.style.display = 'none';
-                const invScreen = document.getElementById('invitation-screen');
                 invScreen.style.display = 'block';
                 setTimeout(() => invScreen.classList.add('visible'), 50);
                 document.body.style.overflow = 'auto';
             }
 
-            if (video) video.onended = revealInvitation;
+            if (video) {
+                video.muted = false;
+                
+                // تشغيل الفيديو ثم إخفاء الغلاف فور بدء التشغيل لمنع الفلاش الأبيض
+                const playPromise = video.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // تم بدء تشغيل الفيديو بنجاح -> نخفي الغلاف الآن
+                        coverScreen.style.display = 'none';
+                    }).catch(err => {
+                        console.log("Video play error:", err);
+                        coverScreen.style.display = 'none';
+                        revealInvitation(); // الانتقال المباشر للدعوة في حال فشل تشغيل الفيديو
+                    });
+                } else {
+                    coverScreen.style.display = 'none';
+                }
+
+                video.onended = revealInvitation;
+            } else {
+                coverScreen.style.display = 'none';
+                revealInvitation();
+            }
 
             videoScreen.onclick = function() {
                 if (video) video.pause();
