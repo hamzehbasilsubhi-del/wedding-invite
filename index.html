@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation - Laith & Marlyn</title>
+    <title>Wedding Invitation - Sami & Taleen</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,9 +24,9 @@
             <div class="hero-overlay-content">
                 <p class="hero-subtitle">THE WEDDING OF</p>
                 <h1 class="hero-names">
-                    Laith
+                    Sami
                     <span>&</span>
-                    Marlyn
+                    Taleen
                 </h1>
             </div>
         </section>
@@ -93,10 +93,10 @@
                 
                 <h2 class="section-title">Counting Down</h2>
                 <div class="countdown-container">
-                    <div class="time-box"><div class="number">00</div><div class="label">Days</div></div>
-                    <div class="time-box"><div class="number">00</div><div class="label">Hours</div></div>
-                    <div class="time-box"><div class="number">00</div><div class="label">Mins</div></div>
-                    <div class="time-box"><div class="number">00</div><div class="label">Secs</div></div>
+                    <div class="time-box"><div class="number" id="days">00</div><div class="label">Days</div></div>
+                    <div class="time-box"><div class="number" id="hours">00</div><div class="label">Hours</div></div>
+                    <div class="time-box"><div class="number" id="minutes">00</div><div class="label">Mins</div></div>
+                    <div class="time-box"><div class="number" id="seconds">00</div><div class="label">Secs</div></div>
                 </div>
             </section>
 
@@ -121,7 +121,7 @@
 
                 <div class="rsvp-footer-closing">
                     <p class="hope-see-you">Hope to see you there!</p>
-                    <p class="couple-signature">Laith and Marlyn</p>
+                    <p class="couple-signature">Sami and Taleen</p>
                 </div>
             </section>
         </div>
@@ -130,7 +130,7 @@
         <section class="bottom-couple-section">
             <div class="couple-image-container">
                 <div class="top-gradient-overlay"></div>
-                <img src="couple.jpg" alt="Laith and Marlyn" class="blended-couple-img">
+                <img src="couple.jpg" alt="Sami and Taleen" class="blended-couple-img">
             </div>
         </section>
 
@@ -139,14 +139,11 @@
     <!-- Audio Player Toggle -->
     <button id="audio-toggle" aria-label="Toggle Audio">🎵</button>
 
-    <!-- Script for Scroll Animations -->
+    <!-- Interactive Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null,
-                threshold: 0.15
-            };
-
+            // 1. Scroll Fade Up Observer
+            const observerOptions = { root: null, threshold: 0.1 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -156,6 +153,34 @@
             }, observerOptions);
 
             document.querySelectorAll('.fade-in-line').forEach(el => observer.observe(el));
+
+            // 2. Dynamic Real-time Countdown Timer Functionality
+            const targetDate = new Date("November 20, 2026 19:00:00").getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                if (difference > 0) {
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                    document.getElementById("days").innerText = String(days).padStart(2, '0');
+                    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+                    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+                    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+                } else {
+                    document.getElementById("days").innerText = "00";
+                    document.getElementById("hours").innerText = "00";
+                    document.getElementById("minutes").innerText = "00";
+                    document.getElementById("seconds").innerText = "00";
+                }
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
         });
     </script>
 </body>

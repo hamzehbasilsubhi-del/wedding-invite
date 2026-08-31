@@ -24,7 +24,7 @@ body, html {
     overflow-x: hidden;
 }
 
-/* Petals Canvas */
+/* Petals Canvas Background */
 #petals-canvas {
     position: fixed;
     top: 0;
@@ -62,9 +62,7 @@ body, html {
     color: var(--text-burgundy);
 }
 
-/* =========================================================
-   Hero Banner Section
-   ========================================================= */
+/* Hero Banner Section */
 .hero-banner-section {
     position: relative;
     width: 100%;
@@ -149,9 +147,7 @@ body, html {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
 }
 
-/* =========================================================
-   Celebrate Card & Line Animation (Fade Up Staggered)
-   ========================================================= */
+/* Celebrate Card & Staggered Line Animation */
 .celebrate-card-wrapper {
     max-width: 520px;
     margin: 30px auto 10px auto;
@@ -184,7 +180,6 @@ body, html {
 .side-border-img.left { left: 12px; }
 .side-border-img.right { right: 12px; transform: scaleX(-1); }
 
-/* Typography inside Celebrate Card */
 .celebrate-title-group {
     margin-bottom: 25px;
 }
@@ -244,7 +239,7 @@ body, html {
     color: var(--text-burgundy);
 }
 
-/* Fade Up Line Animation Engine */
+/* Fade Up Line Engine */
 .fade-in-line {
     opacity: 0;
     transform: translateY(24px);
@@ -257,7 +252,6 @@ body, html {
     transform: translateY(0);
 }
 
-/* Staggered Delays for Sequence */
 .delay-1 { transition-delay: 0.1s; }
 .delay-2 { transition-delay: 0.25s; }
 .delay-3 { transition-delay: 0.4s; }
@@ -371,8 +365,6 @@ body, html {
     overflow: hidden;
     padding: 40px 10px;
     margin: 30px 0 10px 0;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .curtain {
@@ -419,7 +411,7 @@ body, html {
     margin-top: 8px;
 }
 
-/* RSVP Section & Organic Blue Wax Seal */
+/* RSVP Section & Organic 3D Blue Wax Seal */
 .rsvp-custom-section {
     margin: 50px auto 10px auto;
     padding: 20px 10px 0px 10px;
