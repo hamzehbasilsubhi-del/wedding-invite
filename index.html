@@ -16,8 +16,25 @@
         <span>ES</span> | <span>EN</span>
     </div>
 
+    <!-- Cover Screen (Envelope / Opening Transition) -->
+    <section id="cover-screen" class="cover-screen">
+        <div class="cover-content">
+            <div class="envelope-wrapper" id="envelope-trigger">
+                <div class="envelope-flap"></div>
+                <div class="envelope-seal">
+                    <span>S & T</span>
+                </div>
+                <div class="envelope-text">
+                    <p class="cover-subtitle">THE WEDDING OF</p>
+                    <h1 class="cover-names">Sami & Taleen</h1>
+                    <p class="tap-to-open">Tap to open invitation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Invitation Screen -->
-    <main id="invitation-screen" class="visible">
+    <main id="invitation-screen" class="invitation-main hidden">
         
         <!-- Hero Banner Section -->
         <section class="hero-banner-section">
@@ -36,44 +53,44 @@
             <img src="flower-divider.png" alt="Divider" class="flower-divider">
         </div>
 
-        <!-- Celebrate Card Section with Staggered Fade Up Effect -->
+        <!-- Celebrate Card Section -->
         <section class="celebrate-card-wrapper">
             <div class="celebrate-card">
                 <div class="side-border-img left"></div>
                 <div class="side-border-img right"></div>
                 
-                <!-- Animated Title Lines -->
                 <div class="celebrate-title-group">
-                    <h2 class="celebrate-title-line fade-in-line delay-1">Join Us To</h2>
-                    <h2 class="celebrate-title-line fade-in-line delay-2">Celebrate</h2>
-                    <h2 class="celebrate-title-line fade-in-line delay-3">Our Wedding</h2>
+                    <h2 class="celebrate-title-line fade-in-line">Join Us To</h2>
+                    <h2 class="celebrate-title-line fade-in-line">Celebrate</h2>
+                    <h2 class="celebrate-title-line fade-in-line">Our Wedding</h2>
                 </div>
 
-                <div class="celebrate-divider-line fade-in-line delay-4"></div>
+                <div class="celebrate-divider-line fade-in-line"></div>
 
-                <!-- Animated Description Lines -->
                 <div class="celebrate-text-group">
-                    <p class="celebrate-text-line fade-in-line delay-5">We are so excited to celebrate this</p>
-                    <p class="celebrate-text-line fade-in-line delay-6">special day with you.</p>
+                    <p class="celebrate-text-line fade-in-line">We are so excited to celebrate this</p>
+                    <p class="celebrate-text-line fade-in-line">special day with you.</p>
                 </div>
 
-                <!-- Animated Time & Location Lines -->
-                <h3 class="celebrate-location-title fade-in-line delay-7">Time & Location</h3>
-                <p class="celebrate-venue-name fade-in-line delay-8">Voco Riyadh Banquet Hall,</p>
-                <p class="celebrate-venue-region fade-in-line delay-9">An Namudhajiyah, Saudi Arabia, Riyadh</p>
-                <p class="celebrate-time fade-in-line delay-10">7:00 PM</p>
+                <h3 class="celebrate-location-title fade-in-line">Time & Location</h3>
+                <p class="celebrate-venue-name fade-in-line">Voco Riyadh Banquet Hall,</p>
+                <p class="celebrate-venue-region fade-in-line">An Namudhajiyah, Saudi Arabia, Riyadh</p>
+                <p class="celebrate-time fade-in-line">7:00 PM</p>
             </div>
         </section>
 
-        <!-- Invitation Body & Map -->
+        <!-- Venue & Location Section -->
         <div class="invitation-body">
             <section class="venue-location-section">
                 <h2 class="section-title">Location</h2>
                 <p class="section-subtitle">Find your way to our special day</p>
                 
-                <img src="building.png" alt="Venue Building" class="venue-building-img">
+                <!-- Voco Building Image -->
+                <div class="building-image-wrapper fade-in-line">
+                    <img src="voco-building.png" alt="Voco Riyadh Building" class="venue-building-img">
+                </div>
                 
-                <div class="map-frame-wrapper">
+                <div class="map-frame-wrapper fade-in-line">
                     <div class="map-top-ornament"></div>
                     <div class="map-container">
                         <iframe 
@@ -86,8 +103,8 @@
                 </div>
             </section>
 
-            <!-- Countdown Section -->
-            <section class="countdown-section-wrapper reveal-visible">
+            <!-- Countdown Section (with Side Curtains) -->
+            <section class="countdown-section-wrapper fade-in-line">
                 <div class="curtain curtain-left"></div>
                 <div class="curtain curtain-right"></div>
                 
@@ -100,8 +117,8 @@
                 </div>
             </section>
 
-            <!-- RSVP Section with 3D Blue Wax Seal -->
-            <section class="rsvp-custom-section">
+            <!-- RSVP Section -->
+            <section class="rsvp-custom-section fade-in-line">
                 <h2 class="rsvp-script-title">Confirm Your Attendance</h2>
                 <p class="rsvp-description-text">To help us prepare for a joyful celebration,<br>kindly confirm your attendance.</p>
                 
@@ -136,25 +153,41 @@
 
     </main>
 
-    <!-- Audio Player Toggle -->
+    <!-- Audio Player Toggle Button -->
     <button id="audio-toggle" aria-label="Toggle Audio">🎵</button>
 
-    <!-- Interactive Scripts -->
+    <!-- App Engine & Interactions -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Scroll Fade Up Observer
-            const observerOptions = { root: null, threshold: 0.1 };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
+            const coverScreen = document.getElementById('cover-screen');
+            const invitationScreen = document.getElementById('invitation-screen');
+            const envelopeTrigger = document.getElementById('envelope-trigger');
 
-            document.querySelectorAll('.fade-in-line').forEach(el => observer.observe(el));
+            // 1. Cover Envelope Transition Handler
+            envelopeTrigger.addEventListener('click', () => {
+                coverScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    coverScreen.style.display = 'none';
+                    invitationScreen.classList.remove('hidden');
+                    invitationScreen.classList.add('fade-in');
+                    initScrollObserver();
+                }, 800);
+            });
 
-            // 2. Dynamic Real-time Countdown Timer Functionality
+            // 2. Scroll Animation Observer (Fade In Elements)
+            function initScrollObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                document.querySelectorAll('.fade-in-line').forEach(el => observer.observe(el));
+            }
+
+            // 3. Live Countdown Engine
             const targetDate = new Date("November 20, 2026 19:00:00").getTime();
 
             function updateCountdown() {
