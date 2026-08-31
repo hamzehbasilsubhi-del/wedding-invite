@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
     --bg-cream: #FAF8F5;
@@ -95,24 +95,6 @@ body, html {
 
 #invitation-screen.visible {
     opacity: 1;
-}
-
-/* Top Navigation Language Toggle */
-.top-nav {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 50;
-    display: flex;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(8px);
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border-light);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    color: var(--text-burgundy);
 }
 
 /* Hero Banner Section */
@@ -600,14 +582,15 @@ body, html {
 .modal-card {
     background: var(--bg-cream);
     width: 90%;
-    max-width: 420px;
-    padding: 35px 30px;
+    max-width: 400px;
+    padding: 35px 25px;
     border-radius: 12px;
     border: 1px solid var(--accent-gold);
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     position: relative;
     transform: translateY(20px);
     transition: transform 0.4s ease;
+    direction: rtl;
 }
 
 .modal-overlay.active .modal-card {
@@ -616,8 +599,8 @@ body, html {
 
 .modal-close-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 12px;
+    left: 18px;
     background: transparent;
     border: none;
     font-size: 1.8rem;
@@ -626,16 +609,17 @@ body, html {
 }
 
 .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
+    font-family: 'Cairo', 'Cormorant Garamond', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
     text-align: center;
     color: var(--text-burgundy);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .modal-subtitle {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.85rem;
     text-align: center;
     color: #666;
     margin-bottom: 25px;
@@ -643,37 +627,34 @@ body, html {
 
 .form-group {
     margin-bottom: 18px;
-    text-align: left;
+    text-align: right;
 }
 
 .form-group label {
     display: block;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-burgundy);
     margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .form-group input,
-.form-group select,
-.form-group textarea {
+.form-group select {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Cairo', sans-serif;
     font-size: 0.9rem;
     background: #fff;
     color: #333;
     outline: none;
+    box-sizing: border-box;
 }
 
 .form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.form-group select:focus {
     border-color: var(--accent-gold);
 }
 
@@ -684,10 +665,9 @@ body, html {
     color: #fff;
     border: none;
     border-radius: 6px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
     transition: background 0.3s ease;
