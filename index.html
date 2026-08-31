@@ -16,22 +16,23 @@
         <span>ES</span> | <span>EN</span>
     </div>
 
-    <!-- Cover Screen (Envelope / Opening Transition) -->
+    <!-- Cover Screen (Envelope Image Trigger) -->
     <section id="cover-screen" class="cover-screen">
         <div class="cover-content">
-            <div class="envelope-wrapper" id="envelope-trigger">
-                <div class="envelope-flap"></div>
-                <div class="envelope-seal">
-                    <span>S & T</span>
-                </div>
-                <div class="envelope-text">
-                    <p class="cover-subtitle">THE WEDDING OF</p>
-                    <h1 class="cover-names">Sami & Taleen</h1>
-                    <p class="tap-to-open">Tap to open invitation</p>
-                </div>
+            <div class="envelope-image-wrapper" id="envelope-trigger">
+                <img src="cover.jpg" alt="Envelope Cover" class="cover-envelope-img">
+                <p class="tap-to-open">Tap to open invitation</p>
             </div>
         </div>
     </section>
+
+    <!-- Transition Video Container (Appears when envelope is tapped) -->
+    <div id="video-overlay" class="video-overlay hidden">
+        <video id="transition-video" playsinline preload="auto">
+            <source src="transition.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <!-- Main Invitation Screen -->
     <main id="invitation-screen" class="invitation-main hidden">
@@ -160,18 +161,39 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const coverScreen = document.getElementById('cover-screen');
-            const invitationScreen = document.getElementById('invitation-screen');
             const envelopeTrigger = document.getElementById('envelope-trigger');
+            const videoOverlay = document.getElementById('video-overlay');
+            const transitionVideo = document.getElementById('transition-video');
+            const invitationScreen = document.getElementById('invitation-screen');
 
-            // 1. Cover Envelope Transition Handler
+            // 1. Image Click -> Play Video Transition Engine
             envelopeTrigger.addEventListener('click', () => {
                 coverScreen.classList.add('fade-out');
                 setTimeout(() => {
                     coverScreen.style.display = 'none';
+                    videoOverlay.classList.remove('hidden');
+                    videoOverlay.classList.add('fade-in');
+                    transitionVideo.play();
+                }, 400);
+            });
+
+            // Transition to main invitation when video ends
+            function revealInvitation() {
+                videoOverlay.classList.add('fade-out');
+                setTimeout(() => {
+                    videoOverlay.style.display = 'none';
                     invitationScreen.classList.remove('hidden');
                     invitationScreen.classList.add('fade-in');
                     initScrollObserver();
-                }, 800);
+                }, 600);
+            }
+
+            transitionVideo.addEventListener('ended', revealInvitation);
+            
+            // Allow skipping video on tap
+            videoOverlay.addEventListener('click', () => {
+                transitionVideo.pause();
+                revealInvitation();
             });
 
             // 2. Scroll Animation Observer (Fade In Elements)
