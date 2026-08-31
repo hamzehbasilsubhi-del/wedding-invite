@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation - Laith & Marleen</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
 </head>
 <body>
 
@@ -71,7 +71,6 @@
                         <iframe 
                             src="https://maps.google.com/maps?q=Voco%20Riyadh%20Banquet%20Hall&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                             allowfullscreen="" 
-                            loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
@@ -145,34 +144,34 @@
 
     </div>
 
-    <!-- RSVP Modal Form Window -->
+    <!-- RSVP Modal Form Window (English) -->
     <div id="rsvp-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="modal-close-btn" onclick="closeRsvpModal()">&times;</button>
-            <h2 class="modal-title">تأكيد الحضور</h2>
-            <p class="modal-subtitle">يسعدنا مشاركتكم لنا في هذه اللحظات المميزة</p>
+            <h2 class="modal-title">RSVP</h2>
+            <p class="modal-subtitle">We would be honored by your presence</p>
 
             <form id="rsvp-form" onsubmit="handleFormSubmit(event)">
                 <div class="form-group">
-                    <label for="guest-name">اسم الضيف</label>
-                    <input type="text" id="guest-name" placeholder="أدخل اسمك الكريم" required>
+                    <label for="guest-name">Guest Name</label>
+                    <input type="text" id="guest-name" placeholder="Enter your full name" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="guest-count">عدد المرافقين</label>
+                    <label for="guest-count">Number of Guests</label>
                     <input type="number" id="guest-count" min="0" max="10" value="0" placeholder="0" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="attending-status">هل ستحضر؟ (اختياري)</label>
+                    <label for="attending-status">Will you attend? (Optional)</label>
                     <select id="attending-status">
-                        <option value="" disabled selected>اختر الإجابة</option>
-                        <option value="yes">أتشرف بالحضور</option>
-                        <option value="no">أعتذر عن الحضور</option>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="yes">Joyfully Accept</option>
+                        <option value="no">Regretfully Decline</option>
                     </select>
                 </div>
 
-                <button type="submit" class="submit-rsvp-btn">تأكيد الإرسال</button>
+                <button type="submit" class="submit-rsvp-btn">Confirm Reservation</button>
             </form>
         </div>
     </div>
@@ -234,7 +233,7 @@
         function handleFormSubmit(event) {
             event.preventDefault();
             const name = document.getElementById('guest-name').value;
-            alert(`شكراً لك ${name}، تم استلام ردك بنجاح!`);
+            alert(`Thank you ${name}! Your RSVP response has been submitted successfully.`);
             closeRsvpModal();
             document.getElementById('rsvp-form').reset();
         }
