@@ -70,7 +70,7 @@ body, html {
 #video-screen {
     z-index: 25;
     display: none;
-    background: #000000; /* خلفية سوداء لمنع الفلاش الأبيض */
+    background: #000000;
 }
 
 #video-screen video {
@@ -670,12 +670,14 @@ body, html {
     margin-bottom: 10px;
 }
 
+/* Typewriter styles for smooth layout */
 .hope-see-you {
     font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
     font-size: 3rem;
     color: var(--text-burgundy);
     font-weight: 400;
     margin-bottom: 8px;
+    min-height: 1.2em; /* Prevents shifting while empty */
 }
 
 .couple-signature {
@@ -684,6 +686,18 @@ body, html {
     color: var(--text-burgundy);
     letter-spacing: 0.5px;
     font-weight: 400;
+    min-height: 1.2em; /* Prevents shifting while empty */
+}
+
+/* Blinking typing cursor */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 0.7s step-end infinite;
+    font-weight: 300;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
 .bottom-couple-section {

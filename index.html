@@ -127,9 +127,10 @@
                     <p class="click-to-open">Click to open</p>
                 </div>
 
-                <div class="rsvp-footer-closing">
-                    <h3 class="hope-see-you">Hope to see you there!</h3>
-                    <p class="couple-signature">Laith and Marleen</p>
+                <div class="rsvp-footer-closing" id="rsvp-footer-closing">
+                    <!-- Text removed from here and placed in data-text for Typewriter effect -->
+                    <h3 class="hope-see-you" id="type-hope" data-text="Hope to see you there!"></h3>
+                    <p class="couple-signature" id="type-names" data-text="Laith and Marleen"></p>
                 </div>
             </section>
 
@@ -177,7 +178,6 @@
     </div>
 
     <script>
-        // Start Experience & Play Music without White Flash
         function startExperience() {
             const music = document.getElementById('bg-music');
             const coverScreen = document.getElementById('cover-screen');
@@ -185,13 +185,11 @@
             const video = document.getElementById('transition-video');
             const invScreen = document.getElementById('invitation-screen');
 
-            // 1. تشغيل الموسيقى فوراً عند اللمس
             if (music) {
                 music.muted = false;
                 music.play().catch(error => console.log("Audio play error:", error));
             }
 
-            // 2. إظهار حاوي الفيديو في الخلفية أولاً
             videoScreen.style.display = 'block';
 
             function revealInvitation() {
@@ -203,23 +201,18 @@
 
             if (video) {
                 video.muted = false;
-                
-                // تشغيل الفيديو ثم إخفاء الغلاف فور بدء التشغيل لمنع الفلاش الأبيض
                 const playPromise = video.play();
-                
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
-                        // تم بدء تشغيل الفيديو بنجاح -> نخفي الغلاف الآن
                         coverScreen.style.display = 'none';
                     }).catch(err => {
                         console.log("Video play error:", err);
                         coverScreen.style.display = 'none';
-                        revealInvitation(); // الانتقال المباشر للدعوة في حال فشل تشغيل الفيديو
+                        revealInvitation(); 
                     });
                 } else {
                     coverScreen.style.display = 'none';
                 }
-
                 video.onended = revealInvitation;
             } else {
                 coverScreen.style.display = 'none';
@@ -232,7 +225,6 @@
             };
         }
 
-        // Toggle Audio Button
         function toggleAudio() {
             const music = document.getElementById('bg-music');
             if (music) {
@@ -244,7 +236,6 @@
             }
         }
 
-        // RSVP Modal Functions
         function openRsvpModal() {
             document.getElementById('rsvp-modal').classList.add('active');
         }
@@ -261,10 +252,33 @@
             document.getElementById('rsvp-form').reset();
         }
 
-        // Scroll Animations
+        // Typewriter Effect Function
+        function startTypewriter(elementId, speed, callback) {
+            const el = document.getElementById(elementId);
+            const text = el.getAttribute('data-text');
+            el.innerHTML = '';
+            el.classList.add('typing-cursor');
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    el.classList.remove('typing-cursor');
+                    if (callback) setTimeout(callback, 400); // Wait a bit before starting next text
+                }
+            }
+            type();
+        }
+
+        let rsvpTyped = false;
+
         window.addEventListener('scroll', function() {
             const windowHeight = window.innerHeight;
 
+            // Fade Animations
             const celebrateCard = document.getElementById('celebrate-card');
             if (celebrateCard) {
                 const rect = celebrateCard.getBoundingClientRect();
@@ -273,23 +287,35 @@
                 }
             }
 
+            // Curtain Animation
             const section = document.getElementById('countdown-section');
             const curtainLeft = document.getElementById('curtain-left');
             const curtainRight = document.getElementById('curtain-right');
             
             if (section) {
                 const rect = section.getBoundingClientRect();
-                
                 if (rect.top < windowHeight * 0.85) {
                     section.classList.add('reveal-visible');
                 }
-
                 if (curtainLeft && curtainRight && rect.top < windowHeight && rect.bottom > 0) {
                     const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
                     const moveDistance = Math.min(Math.max(progress * 160 - 20, 0), 100); 
-                    
                     curtainLeft.style.transform = `translateX(-${moveDistance}px)`;
                     curtainRight.style.transform = `translateX(${moveDistance}px)`;
+                }
+            }
+
+            // Trigger Typewriter when RSVP footer is visible
+            const rsvpFooter = document.getElementById('rsvp-footer-closing');
+            if (rsvpFooter && !rsvpTyped) {
+                const rect = rsvpFooter.getBoundingClientRect();
+                // Trigger when the section is well within view
+                if (rect.top < windowHeight * 0.95 && rect.bottom > 0) {
+                    rsvpTyped = true;
+                    // Type first sentence, then trigger second sentence
+                    startTypewriter('type-hope', 70, () => {
+                        startTypewriter('type-names', 80);
+                    });
                 }
             }
         });
