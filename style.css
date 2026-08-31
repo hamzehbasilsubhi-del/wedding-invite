@@ -91,7 +91,7 @@ body, html {
     opacity: 0;
     transition: opacity 1.2s ease-in-out;
     background: var(--bg-cream);
-    padding-bottom: 80px;
+    padding-bottom: 60px;
 }
 
 #invitation-screen.visible {
@@ -319,9 +319,7 @@ body, html {
     font-family: 'Cormorant Garamond', serif;
 }
 
-/* ----------------------------------------------------
-   تنسيق قسم موقع الحفل المخصص (Location Section)
----------------------------------------------------- */
+/* قسم موقع الحفل */
 .venue-location-section {
     margin: 40px 0 20px 0;
     text-align: center;
@@ -341,30 +339,66 @@ body, html {
     transform: scale(1.02);
 }
 
+/* غلاف الخريطة والإطار الذهبي */
+.map-frame-wrapper {
+    position: relative;
+    max-width: 420px;
+    margin: 25px auto 10px auto;
+    padding: 12px 0;
+}
+
 .map-container {
+    position: relative;
     width: 100%;
-    height: 250px;
-    border-radius: 16px;
+    height: 260px;
+    border-radius: 20px;
     overflow: hidden;
-    border: 1px solid var(--border-light);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    margin-top: 15px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 
+        0 0 0 4px rgba(197, 160, 89, 0.2),
+        0 10px 25px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    z-index: 1;
 }
 
 .map-container iframe {
     width: 100%;
     height: 100%;
     border: 0;
+    border-radius: 18px;
 }
 
-/* ----------------------------------------------------
-   تخصيص قسم العداد التنازلي (بدون مربعات + ظهور تدريجي)
----------------------------------------------------- */
+.map-top-ornament,
+.map-bottom-ornament {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.map-top-ornament {
+    top: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M50 0 C40 12, 35 12, 0 12 C15 12, 25 18, 50 4 C75 18, 85 12, 100 12 C65 12, 60 12, 50 0 Z' fill='%23C5A059'/%3E%3Ccircle cx='50' cy='3' r='2.5' fill='%235B2C38'/%3E%3C/svg%3E");
+}
+
+.map-bottom-ornament {
+    bottom: 2px;
+    transform: translateX(-50%) rotate(180deg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M50 0 C40 12, 35 12, 0 12 C15 12, 25 18, 50 4 C75 18, 85 12, 100 12 C65 12, 60 12, 50 0 Z' fill='%23C5A059'/%3E%3Ccircle cx='50' cy='3' r='2.5' fill='%235B2C38'/%3E%3C/svg%3E");
+}
+
+/* قسم العداد التنازلي */
 .countdown-section-wrapper {
     position: relative;
     overflow: hidden;
-    padding: 40px 10px 30px 10px;
-    margin: 30px 0;
+    padding: 40px 10px 40px 10px;
+    margin: 30px 0 10px 0;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -439,80 +473,138 @@ body, html {
     font-weight: 400;
 }
 
-.btn-primary {
-    display: inline-block;
-    padding: 12px 28px;
-    border: 1px solid var(--accent-gold);
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--text-dark);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    margin-top: 15px;
-}
-
-.btn-primary:hover {
-    background: var(--text-burgundy);
-    color: #fff;
-    border-color: var(--text-burgundy);
-}
-
-.info-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 15px;
+/* =========================================================
+   قسم تأكيد الحضور المحدث (RSVP) المطابق للصورة المرجعية
+   ========================================================= */
+.rsvp-custom-section {
+    margin: 50px auto 20px auto;
+    padding: 20px 10px;
     text-align: center;
-    backdrop-filter: blur(5px);
 }
 
-.info-card h4 {
+.rsvp-script-title {
+    font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
+    font-size: 3.2rem;
+    color: var(--accent-gold);
+    font-weight: 400;
+    margin-bottom: 15px;
+    line-height: 1.1;
+    text-shadow: 0 1px 2px rgba(197, 160, 89, 0.15);
+}
+
+.rsvp-description-text {
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 35px;
+    font-weight: 400;
+}
+
+/* تصميم الختم الشمعي العنابي بالكامل بدون صور خارجية */
+.rsvp-seal-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rsvp-seal-wrapper:hover {
+    transform: scale(1.06);
+}
+
+.wax-seal-btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #8B263E 0%, #5B2C38 65%, #3B1B24 100%);
+    box-shadow: 
+        0 10px 22px rgba(91, 44, 56, 0.35),
+        inset 0 2px 4px rgba(255, 255, 255, 0.25),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* شكل الحواف الحرة للشمع */
+    border: 3px solid #6E2938;
+}
+
+.wax-seal-inner {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 1px dashed rgba(197, 160, 89, 0.6);
+    background: radial-gradient(circle at 40% 40%, #6E2938 0%, #4A222B 100%);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4px;
+}
+
+.seal-text {
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
     font-size: 1.3rem;
-    color: var(--text-burgundy);
-    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--accent-gold);
+    letter-spacing: 2px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-.info-card p {
-    font-size: 1rem;
-    color: #666;
+.seal-ornament {
+    width: 35px;
+    height: 8px;
+    margin-top: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10'%3E%3Cpath d='M20 0 L22 4 L26 5 L22 6 L20 10 L18 6 L14 5 L18 4 Z' fill='%23C5A059'/%3E%3Cpath d='M0 5 Q10 2 20 5 Q30 8 40 5' stroke='%23C5A059' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.rsvp-form {
-    background: var(--card-bg);
-    border: 1px solid var(--border-light);
-    padding: 25px;
-    border-radius: 15px;
-    text-align: right;
-    direction: rtl;
-    margin-top: 25px;
+/* مؤشر التفاعل للفتح */
+.rsvp-pointer-hint {
+    margin-bottom: 45px;
 }
 
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
+.chevron-arrow {
     display: block;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    margin-bottom: 6px;
-    color: #444;
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+    line-height: 1;
+    font-weight: 300;
+    margin-bottom: 2px;
 }
 
-.form-control {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.95);
-    font-family: inherit;
-    font-size: 1rem;
+.click-to-open {
+    font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    margin: 0;
+}
+
+/* التوقيع وخاتمة الدعوة */
+.rsvp-footer-closing {
+    margin-top: 20px;
+}
+
+.hope-see-you {
+    font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
+    font-size: 2.8rem;
+    color: var(--accent-gold);
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.couple-signature {
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    letter-spacing: 0.5px;
+    font-weight: 400;
 }
 
 #audio-toggle {
