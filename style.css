@@ -125,7 +125,7 @@ body, html {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px 20px 140px 20px; /* Raised content higher */
 }
 
 .hero-banner-section::before {
@@ -151,6 +151,18 @@ body, html {
     margin: 0 auto;
     color: var(--text-burgundy);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+    animation: fadeIn 2s ease-in-out forwards; /* Fade effect for the hero text */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero-subtitle {
@@ -168,7 +180,7 @@ body, html {
     font-weight: 400;
     color: var(--text-burgundy);
     line-height: 1.1;
-    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
 .hero-names span {
@@ -176,13 +188,6 @@ body, html {
     font-size: 2.2rem;
     font-style: italic;
     margin: 5px 0;
-}
-
-.hero-date-location {
-    font-size: 1.25rem;
-    color: var(--text-burgundy);
-    line-height: 1.6;
-    font-weight: 600;
 }
 
 /* Flower Divider */
