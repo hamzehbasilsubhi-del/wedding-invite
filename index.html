@@ -1,61 +1,51 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة زفاف لوسيا وماتيو</title>
+    <title>Wedding Invitation - Sami & Taleen</title>
     <link rel="stylesheet" href="style.css">
-    <!-- خطوط إضافية لمطابقة الخط الكلاسيكي الموجود بالصورة المرجعية -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
 </head>
 <body>
 
-    <!-- Canvas لتأثير تساقط البتلات -->
     <canvas id="petals-canvas"></canvas>
 
-    <!-- محول اللغات الثابت -->
     <div class="top-nav">
-        <span>EN</span> | <span>ES</span>
+        <span>ES</span> | <span>EN</span>
     </div>
 
-    <!-- زر الصوت السفلي والموسيقى -->
     <button id="audio-toggle" onclick="toggleAudio()">🎵</button>
     <audio id="bg-music" src="music.mp3" loop></audio>
 
-    <!-- 1. الشاشة الأولى: المغلف والختم الشمعي -->
     <div id="cover-screen" class="screen">
         <button id="seal-button" onclick="startExperience()"></button>
     </div>
 
-    <!-- 2. الشاشة الثانية: الفيديو الانتقالي عند الفتح -->
     <div id="video-screen" class="screen">
         <video id="transition-video" playsinline>
             <source src="transition.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- 3. الشاشة الثالثة: الدعوة كاملة -->
     <div id="invitation-screen" class="screen">
         
-        <!-- البانر الرئيسي -->
         <header class="hero-banner-section">
             <div class="hero-overlay-content">
                 <p class="hero-subtitle">THE WEDDING OF</p>
-                <h1 class="hero-names">Lucia <span>&</span> Matteo</h1>
+                <h1 class="hero-names">Sami <span>&</span> Taleen</h1>
                 <p class="hero-date-location">
-                    27 JULY 2027<br>
+                    20 NOVEMBER 2026<br>
                     Voco Riyadh Banquet Hall<br>
                     Riyadh, Saudi Arabia
                 </p>
             </div>
         </header>
 
-        <!-- صورة الورود المفرغة تحت البانر الرئيسي -->
         <div class="flower-divider-container">
             <img src="flower-divider.png" alt="Flowers" class="flower-divider">
         </div>
 
-        <!-- بطاقة الترحيب -->
         <section class="celebrate-card-wrapper">
             <div class="celebrate-card">
                 <div class="side-border-img left"></div>
@@ -72,19 +62,15 @@
             </div>
         </section>
 
-        <!-- محتوى الدعوة الرئيسي -->
         <div class="invitation-body">
 
-            <!-- قسم موقع الحفل -->
             <section class="venue-location-section">
-                <h2 class="section-title">موقع الحفل</h2>
+                <h2 class="section-title">Venue Location</h2>
                 <p class="section-subtitle" style="font-size: 1.4rem; font-style: normal; font-weight: 600; color: var(--text-burgundy); margin-bottom: 4px;">Voco Riyadh Banquet Hall</p>
-                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: #666; letter-spacing: 0.5px;">An Namudhajiyah , Saudi Arabia, Riyadh</p>
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: #666; letter-spacing: 0.5px;">An Namudhajiyah, Saudi Arabia, Riyadh</p>
 
-                <!-- مجسم الفندق -->
                 <img src="voco-building.png" alt="Voco Riyadh Hotel Building" class="venue-building-img">
 
-                <!-- حاوية الخريطة مع الزخرفة الذهبية -->
                 <div class="map-frame-wrapper">
                     <div class="map-top-ornament"></div>
                     <div class="map-container">
@@ -99,14 +85,12 @@
                 </div>
             </section>
 
-            <!-- قسم العداد التنازلي -->
             <div class="countdown-section-wrapper" id="countdown-section">
-                <!-- الستائر الجانبية لقسم العداد -->
                 <div class="curtain curtain-left" id="curtain-left"></div>
                 <div class="curtain curtain-right" id="curtain-right"></div>
 
                 <h2 class="section-title">Countdown</h2>
-                <p class="section-subtitle">• Until 27 July 2027 •</p>
+                <p class="section-subtitle">• Until 20 November 2026 •</p>
                 
                 <div class="countdown-container">
                     <div class="time-box">
@@ -128,7 +112,6 @@
                 </div>
             </div>
 
-            <!-- قسم تأكيد الحضور المحدث (RSVP) -->
             <section class="rsvp-custom-section">
                 <h2 class="rsvp-script-title">Confirm Your Attendance</h2>
                 <p class="rsvp-description-text">
@@ -136,7 +119,6 @@
                     kindly confirm your attendance.
                 </p>
 
-                <!-- الختم الشمعي التفاعلي باللون العنابي والذهبي -->
                 <div class="rsvp-seal-wrapper" onclick="openRsvpModal()">
                     <div class="wax-seal-btn">
                         <div class="wax-seal-inner">
@@ -153,15 +135,23 @@
 
                 <div class="rsvp-footer-closing">
                     <h3 class="hope-see-you">Hope to see you there!</h3>
-                    <p class="couple-signature">Lucia and Matteo</p>
+                    <p class="couple-signature">Sami and Taleen</p>
                 </div>
             </section>
 
         </div>
+
+        <section class="bottom-couple-section">
+            <div class="couple-image-container">
+                <img src="couple.jpg" alt="Sami and Taleen" class="blended-couple-img">
+                <div class="top-gradient-overlay"></div>
+            </div>
+        </section>
+
     </div>
 
     <script>
-        // 1. تشغيل الفيديو الانتقالي والموسيقى عند الضغط على الختم
+        // Start Experience
         function startExperience() {
             document.getElementById('cover-screen').style.display = 'none';
             const videoScreen = document.getElementById('video-screen');
@@ -181,7 +171,7 @@
             };
         }
 
-        // 2. تفاعل الستائر وظهور قسم العداد بشكل تدريجي ناعم عند التمرير
+        // Scroll Animations for Countdown & Curtains
         window.addEventListener('scroll', function() {
             const section = document.getElementById('countdown-section');
             const curtainLeft = document.getElementById('curtain-left');
@@ -205,12 +195,12 @@
             }
         });
 
-        // 3. فتح نافذة تأكيد الحضور عند الضغط على الختم
+        // Open RSVP Form Modal
         function openRsvpModal() {
-            alert("تم فتح نموذج تأكيد الحضور (RSVP)");
+            alert("RSVP Confirmation Form Opened");
         }
 
-        // 4. التحكم بالصوت
+        // Toggle Background Music
         function toggleAudio() {
             const music = document.getElementById('bg-music');
             if (music.paused) {
@@ -220,8 +210,8 @@
             }
         }
 
-        // 5. حساب العداد التنازلي وتحديثه تلقائياً
-        const weddingDate = new Date('July 27, 2027 19:00:00').getTime();
+        // Countdown Timer to 20 November 2026
+        const weddingDate = new Date('November 20, 2026 19:00:00').getTime();
         setInterval(function() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
@@ -239,7 +229,7 @@
             }
         }, 1000);
 
-        // 6. أنيميشن تساقط البتلات على Canvas
+        // Falling Petals Canvas Animation
         const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;

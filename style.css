@@ -4,7 +4,6 @@
     --bg-cream: #FAF8F5;
     --primary-blue: #A2B9C8;
     --text-burgundy: #5B2C38;
-    --text-dark: #333333;
     --accent-gold: #C5A059;
     --card-bg: rgba(255, 255, 255, 0.92);
     --border-light: rgba(197, 160, 89, 0.3);
@@ -21,11 +20,11 @@ body, html {
     min-height: 100%;
     background-color: var(--bg-cream);
     font-family: 'Cormorant Garamond', serif;
-    color: var(--text-dark);
+    color: var(--text-burgundy);
     overflow-x: hidden;
 }
 
-/* خلفية تساقط البتلات */
+/* Petals Canvas */
 #petals-canvas {
     position: fixed;
     top: 0;
@@ -36,7 +35,7 @@ body, html {
     z-index: 10;
 }
 
-/* إدارة الشاشات */
+/* Screen Management */
 .screen {
     width: 100%;
     min-height: 100vh;
@@ -45,7 +44,7 @@ body, html {
     left: 0;
 }
 
-/* 1. شاشة الغلاف والختم */
+/* Cover Screen */
 #cover-screen {
     background: url('cover.jpg') no-repeat center center/cover;
     z-index: 30;
@@ -71,7 +70,7 @@ body, html {
     100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 }
 
-/* 2. شاشة الفيديو الانتقالي */
+/* Video Transition Screen */
 #video-screen {
     z-index: 25;
     display: none;
@@ -84,21 +83,21 @@ body, html {
     object-fit: cover;
 }
 
-/* 3. شاشة الدعوة الرئيسية */
+/* Invitation Main Screen */
 #invitation-screen {
     z-index: 1;
     display: none;
     opacity: 0;
     transition: opacity 1.2s ease-in-out;
     background: var(--bg-cream);
-    padding-bottom: 60px;
+    padding-bottom: 0px;
 }
 
 #invitation-screen.visible {
     opacity: 1;
 }
 
-/* زر تغيير اللغة العلوي الثابت */
+/* Top Navigation Language Toggle */
 .top-nav {
     position: fixed;
     top: 20px;
@@ -106,7 +105,7 @@ body, html {
     z-index: 50;
     display: flex;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(8px);
     padding: 6px 14px;
     border-radius: 20px;
@@ -116,7 +115,7 @@ body, html {
     color: var(--text-burgundy);
 }
 
-/* البانر الرئيسي */
+/* Hero Banner Section */
 .hero-banner-section {
     position: relative;
     width: 100%;
@@ -181,12 +180,12 @@ body, html {
 
 .hero-date-location {
     font-size: 1.25rem;
-    color: #2C2C2C;
+    color: var(--text-burgundy);
     line-height: 1.6;
     font-weight: 600;
 }
 
-/* فاصل الورود الشفاف */
+/* Flower Divider */
 .flower-divider-container {
     width: 100%;
     display: flex;
@@ -204,7 +203,7 @@ body, html {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
 }
 
-/* قسم الترحيب */
+/* Celebrate Card */
 .celebrate-card-wrapper {
     max-width: 520px;
     margin: 30px auto 10px auto;
@@ -234,14 +233,8 @@ body, html {
     background-position: center;
 }
 
-.side-border-img.left {
-    left: 12px;
-}
-
-.side-border-img.right {
-    right: 12px;
-    transform: scaleX(-1);
-}
+.side-border-img.left { left: 12px; }
+.side-border-img.right { right: 12px; transform: scaleX(-1); }
 
 .celebrate-title {
     font-size: 2.8rem;
@@ -263,7 +256,7 @@ body, html {
 .celebrate-text {
     font-size: 1.35rem;
     font-family: 'Cormorant Garamond', serif;
-    color: #4A4A4A;
+    color: var(--text-burgundy);
     line-height: 1.6;
     margin-bottom: 40px;
     font-style: italic;
@@ -278,7 +271,7 @@ body, html {
 
 .celebrate-venue-name {
     font-size: 1.3rem;
-    color: #333;
+    color: var(--text-burgundy);
     font-weight: 600;
     margin-bottom: 4px;
 }
@@ -292,14 +285,14 @@ body, html {
 .celebrate-time {
     font-size: 1.2rem;
     font-style: italic;
-    color: #555;
+    color: var(--text-burgundy);
 }
 
-/* محتوى الدعوة العامة */
+/* Invitation Body */
 .invitation-body {
     max-width: 500px;
     margin: 0 auto;
-    padding: 20px 20px 40px 20px;
+    padding: 20px 20px 10px 20px;
     text-align: center;
 }
 
@@ -319,7 +312,7 @@ body, html {
     font-family: 'Cormorant Garamond', serif;
 }
 
-/* قسم موقع الحفل */
+/* Venue Location */
 .venue-location-section {
     margin: 40px 0 20px 0;
     text-align: center;
@@ -335,11 +328,9 @@ body, html {
     transition: transform 0.4s ease;
 }
 
-.venue-building-img:hover {
-    transform: scale(1.02);
-}
+.venue-building-img:hover { transform: scale(1.02); }
 
-/* غلاف الخريطة والإطار الذهبي */
+/* Map Gold Frame */
 .map-frame-wrapper {
     position: relative;
     max-width: 420px;
@@ -393,7 +384,7 @@ body, html {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M50 0 C40 12, 35 12, 0 12 C15 12, 25 18, 50 4 C75 18, 85 12, 100 12 C65 12, 60 12, 50 0 Z' fill='%23C5A059'/%3E%3Ccircle cx='50' cy='3' r='2.5' fill='%235B2C38'/%3E%3C/svg%3E");
 }
 
-/* قسم العداد التنازلي */
+/* Countdown Section */
 .countdown-section-wrapper {
     position: relative;
     overflow: hidden;
@@ -421,17 +412,8 @@ body, html {
     transition: transform 0.1s ease-out;
 }
 
-.curtain-left {
-    left: 0;
-    background-image: url('curtain-left.png');
-    background-position: left center;
-}
-
-.curtain-right {
-    right: 0;
-    background-image: url('curtain-right.png');
-    background-position: right center;
-}
+.curtain-left { left: 0; background-image: url('curtain-left.png'); background-position: left center; }
+.curtain-right { right: 0; background-image: url('curtain-right.png'); background-position: right center; }
 
 .countdown-container {
     display: flex;
@@ -444,15 +426,7 @@ body, html {
     direction: ltr;
 }
 
-.time-box {
-    background: transparent;
-    border: none;
-    padding: 0;
-    min-width: unset;
-    backdrop-filter: none;
-    box-shadow: none;
-    text-align: center;
-}
+.time-box { text-align: center; }
 
 .time-box .number {
     font-family: 'Cormorant Garamond', serif;
@@ -460,7 +434,6 @@ body, html {
     font-weight: 400;
     color: var(--text-burgundy);
     line-height: 1;
-    letter-spacing: 1px;
 }
 
 .time-box .label {
@@ -470,38 +443,34 @@ body, html {
     color: #8C8C8C;
     text-transform: uppercase;
     margin-top: 8px;
-    font-weight: 400;
 }
 
-/* =========================================================
-   قسم تأكيد الحضور المحدث (RSVP) المطابق للصورة المرجعية
-   ========================================================= */
+/* RSVP Section */
 .rsvp-custom-section {
-    margin: 50px auto 20px auto;
-    padding: 20px 10px;
+    margin: 50px auto 10px auto;
+    padding: 20px 10px 0px 10px;
     text-align: center;
 }
 
 .rsvp-script-title {
     font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
-    font-size: 3.2rem;
-    color: var(--accent-gold);
+    font-size: 3.4rem;
+    color: var(--text-burgundy);
     font-weight: 400;
     margin-bottom: 15px;
     line-height: 1.1;
-    text-shadow: 0 1px 2px rgba(197, 160, 89, 0.15);
 }
 
 .rsvp-description-text {
     font-family: 'Playfair Display', 'Cormorant Garamond', serif;
     font-size: 1.15rem;
-    color: #555555;
-    line-height: 1.5;
+    color: var(--text-burgundy);
+    line-height: 1.6;
     margin-bottom: 35px;
     font-weight: 400;
 }
 
-/* تصميم الختم الشمعي العنابي بالكامل بدون صور خارجية */
+/* Light Blue Wax Seal Button */
 .rsvp-seal-wrapper {
     display: flex;
     justify-content: center;
@@ -520,26 +489,25 @@ body, html {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #8B263E 0%, #5B2C38 65%, #3B1B24 100%);
+    background: radial-gradient(circle at 35% 35%, #C2D7E5 0%, #A2B9C8 65%, #7D9AAE 100%);
     box-shadow: 
-        0 10px 22px rgba(91, 44, 56, 0.35),
-        inset 0 2px 4px rgba(255, 255, 255, 0.25),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+        0 10px 22px rgba(162, 185, 200, 0.45),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    /* شكل الحواف الحرة للشمع */
-    border: 3px solid #6E2938;
+    border: 3px solid #8FAABF;
 }
 
 .wax-seal-inner {
     width: 88px;
     height: 88px;
     border-radius: 50%;
-    border: 1px dashed rgba(197, 160, 89, 0.6);
-    background: radial-gradient(circle at 40% 40%, #6E2938 0%, #4A222B 100%);
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+    border: 1px dashed rgba(91, 44, 56, 0.4);
+    background: radial-gradient(circle at 40% 40%, #B4CADA 0%, #8FAABF 100%);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -551,29 +519,29 @@ body, html {
     font-family: 'Playfair Display', 'Cormorant Garamond', serif;
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--accent-gold);
+    color: var(--text-burgundy);
     letter-spacing: 2px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
 .seal-ornament {
     width: 35px;
     height: 8px;
     margin-top: 2px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10'%3E%3Cpath d='M20 0 L22 4 L26 5 L22 6 L20 10 L18 6 L14 5 L18 4 Z' fill='%23C5A059'/%3E%3Cpath d='M0 5 Q10 2 20 5 Q30 8 40 5' stroke='%23C5A059' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10'%3E%3Cpath d='M20 0 L22 4 L26 5 L22 6 L20 10 L18 6 L14 5 L18 4 Z' fill='%235B2C38'/%3E%3Cpath d='M0 5 Q10 2 20 5 Q30 8 40 5' stroke='%235B2C38' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* مؤشر التفاعل للفتح */
+/* Pointer Hint */
 .rsvp-pointer-hint {
-    margin-bottom: 45px;
+    margin-bottom: 35px;
 }
 
 .chevron-arrow {
     display: block;
     font-size: 1.1rem;
-    color: var(--accent-gold);
+    color: var(--text-burgundy);
     line-height: 1;
     font-weight: 300;
     margin-bottom: 2px;
@@ -582,19 +550,20 @@ body, html {
 .click-to-open {
     font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
     font-size: 1.8rem;
-    color: var(--accent-gold);
+    color: var(--text-burgundy);
     margin: 0;
 }
 
-/* التوقيع وخاتمة الدعوة */
+/* Closing Signature */
 .rsvp-footer-closing {
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .hope-see-you {
     font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
-    font-size: 2.8rem;
-    color: var(--accent-gold);
+    font-size: 3rem;
+    color: var(--text-burgundy);
     font-weight: 400;
     margin-bottom: 8px;
 }
@@ -602,11 +571,51 @@ body, html {
 .couple-signature {
     font-family: 'Playfair Display', 'Cormorant Garamond', serif;
     font-size: 1.5rem;
-    color: var(--accent-gold);
+    color: var(--text-burgundy);
     letter-spacing: 0.5px;
     font-weight: 400;
 }
 
+/* =========================================================
+   Bottom Couple Photo Section with Smooth Blending Effect
+   ========================================================= */
+.bottom-couple-section {
+    position: relative;
+    width: 100%;
+    margin-top: -15px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--bg-cream);
+}
+
+.couple-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    line-height: 0;
+}
+
+.blended-couple-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Smooth CSS Masking to fade the top & sides seamlessly into the cream background */
+    -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 60%, black 50%, transparent 100%);
+    mask-image: radial-gradient(ellipse 95% 85% at 50% 60%, black 50%, transparent 100%);
+}
+
+.top-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    background: linear-gradient(to bottom, var(--bg-cream) 0%, rgba(250, 248, 245, 0.4) 50%, rgba(250, 248, 245, 0) 100%);
+    pointer-events: none;
+}
+
+/* Floating Audio Button */
 #audio-toggle {
     position: fixed;
     bottom: 20px;
