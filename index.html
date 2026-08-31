@@ -1,131 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation - Sami & Taleen</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
 </head>
 <body>
 
-    <!-- Petals Canvas Animation -->
     <canvas id="petals-canvas"></canvas>
 
-    <!-- Top Navigation Language Toggle -->
     <div class="top-nav">
         <span>ES</span> | <span>EN</span>
     </div>
 
-    <!-- Cover Screen (Envelope Image Trigger) -->
-    <section id="cover-screen" class="cover-screen">
-        <div class="cover-content">
-            <div class="envelope-image-wrapper" id="envelope-trigger">
-                <img src="cover.jpg" alt="Envelope Cover" class="cover-envelope-img">
-                <p class="tap-to-open">Tap to open invitation</p>
-            </div>
-        </div>
-    </section>
+    <button id="audio-toggle" onclick="toggleAudio()" aria-label="Toggle Audio">🎵</button>
+    <audio id="bg-music" src="music.mp3" loop></audio>
 
-    <!-- Transition Video Container (Appears when envelope is tapped) -->
-    <div id="video-overlay" class="video-overlay hidden">
+    <div id="cover-screen" class="screen">
+        <button id="seal-button" onclick="startExperience()" aria-label="Open Invitation"></button>
+    </div>
+
+    <div id="video-screen" class="screen">
         <video id="transition-video" playsinline preload="auto">
             <source src="transition.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Main Invitation Screen -->
-    <main id="invitation-screen" class="invitation-main hidden">
+    <div id="invitation-screen" class="screen">
         
-        <!-- Hero Banner Section -->
-        <section class="hero-banner-section">
+        <header class="hero-banner-section">
             <div class="hero-overlay-content">
                 <p class="hero-subtitle">THE WEDDING OF</p>
-                <h1 class="hero-names">
-                    Sami
-                    <span>&</span>
-                    Taleen
-                </h1>
+                <h1 class="hero-names">Sami <span>&</span> Taleen</h1>
+                <p class="hero-date-location">
+                    20 NOVEMBER 2026<br>
+                    Voco Riyadh Banquet Hall<br>
+                    Riyadh, Saudi Arabia
+                </p>
             </div>
-        </section>
+        </header>
 
-        <!-- Flower Divider Ornament -->
         <div class="flower-divider-container">
-            <img src="flower-divider.png" alt="Divider" class="flower-divider">
+            <img src="flower-divider.png" alt="Flowers" class="flower-divider">
         </div>
 
-        <!-- Celebrate Card Section -->
         <section class="celebrate-card-wrapper">
             <div class="celebrate-card">
                 <div class="side-border-img left"></div>
                 <div class="side-border-img right"></div>
-                
-                <div class="celebrate-title-group">
-                    <h2 class="celebrate-title-line fade-in-line">Join Us To</h2>
-                    <h2 class="celebrate-title-line fade-in-line">Celebrate</h2>
-                    <h2 class="celebrate-title-line fade-in-line">Our Wedding</h2>
-                </div>
 
-                <div class="celebrate-divider-line fade-in-line"></div>
+                <h2 class="celebrate-title">Join Us To Celebrate<br>Our Wedding</h2>
+                <div class="celebrate-divider-line"></div>
+                <p class="celebrate-text">We are so excited to celebrate this<br>special day with you.</p>
 
-                <div class="celebrate-text-group">
-                    <p class="celebrate-text-line fade-in-line">We are so excited to celebrate this</p>
-                    <p class="celebrate-text-line fade-in-line">special day with you.</p>
-                </div>
-
-                <h3 class="celebrate-location-title fade-in-line">Time & Location</h3>
-                <p class="celebrate-venue-name fade-in-line">Voco Riyadh Banquet Hall,</p>
-                <p class="celebrate-venue-region fade-in-line">An Namudhajiyah, Saudi Arabia, Riyadh</p>
-                <p class="celebrate-time fade-in-line">7:00 PM</p>
+                <h3 class="celebrate-location-title">Time & Location</h3>
+                <p class="celebrate-venue-name">Voco Riyadh Banquet Hall,</p>
+                <p class="celebrate-venue-region">An Namudhajiyah, Saudi Arabia, Riyadh</p>
+                <p class="celebrate-time">7:00 PM</p>
             </div>
         </section>
 
-        <!-- Venue & Location Section -->
         <div class="invitation-body">
+
             <section class="venue-location-section">
-                <h2 class="section-title">Location</h2>
-                <p class="section-subtitle">Find your way to our special day</p>
-                
-                <!-- Voco Building Image -->
-                <div class="building-image-wrapper fade-in-line">
-                    <img src="voco-building.png" alt="Voco Riyadh Building" class="venue-building-img">
-                </div>
-                
-                <div class="map-frame-wrapper fade-in-line">
+                <h2 class="section-title">Venue Location</h2>
+                <p class="section-subtitle" style="font-size: 1.4rem; font-style: normal; font-weight: 600; color: var(--text-burgundy); margin-bottom: 4px;">Voco Riyadh Banquet Hall</p>
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: #666; letter-spacing: 0.5px;">An Namudhajiyah, Saudi Arabia, Riyadh</p>
+
+                <img src="voco-building.png" alt="Voco Riyadh Hotel Building" class="venue-building-img">
+
+                <div class="map-frame-wrapper">
                     <div class="map-top-ornament"></div>
                     <div class="map-container">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.78280654063!2d46.6852!3d24.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQxJzE3LjMiTiA0NsKwNDEnMDYuNyJF!5e0!3m2!1sen!2s!4v1600000000000!5m2!1sen!2s" 
+                            src="https://maps.google.com/maps?q=Voco%20Riyadh%20Banquet%20Hall&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                             allowfullscreen="" 
-                            loading="lazy">
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
                     <div class="map-bottom-ornament"></div>
                 </div>
             </section>
 
-            <!-- Countdown Section (with Side Curtains) -->
-            <section class="countdown-section-wrapper fade-in-line">
-                <div class="curtain curtain-left"></div>
-                <div class="curtain curtain-right"></div>
-                
-                <h2 class="section-title">Counting Down</h2>
-                <div class="countdown-container">
-                    <div class="time-box"><div class="number" id="days">00</div><div class="label">Days</div></div>
-                    <div class="time-box"><div class="number" id="hours">00</div><div class="label">Hours</div></div>
-                    <div class="time-box"><div class="number" id="minutes">00</div><div class="label">Mins</div></div>
-                    <div class="time-box"><div class="number" id="seconds">00</div><div class="label">Secs</div></div>
-                </div>
-            </section>
+            <div class="countdown-section-wrapper" id="countdown-section">
+                <div class="curtain curtain-left" id="curtain-left"></div>
+                <div class="curtain curtain-right" id="curtain-right"></div>
 
-            <!-- RSVP Section -->
-            <section class="rsvp-custom-section fade-in-line">
-                <h2 class="rsvp-script-title">Confirm Your Attendance</h2>
-                <p class="rsvp-description-text">To help us prepare for a joyful celebration,<br>kindly confirm your attendance.</p>
+                <h2 class="section-title">Countdown</h2>
+                <p class="section-subtitle">• Until 20 November 2026 •</p>
                 
-                <div class="rsvp-seal-wrapper" id="rsvp-trigger">
-                    <div class="wax-seal-wax-base">
-                        <div class="wax-seal-inner-content">
+                <div class="countdown-container">
+                    <div class="time-box">
+                        <div class="number" id="days">00</div>
+                        <div class="label">DAYS</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="number" id="hours">00</div>
+                        <div class="label">HOURS</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="number" id="minutes">00</div>
+                        <div class="label">MINUTES</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="number" id="seconds">00</div>
+                        <div class="label">SECONDS</div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="rsvp-custom-section">
+                <h2 class="rsvp-script-title">Confirm Your Attendance</h2>
+                <p class="rsvp-description-text">
+                    To help us prepare for a joyful celebration,<br>
+                    kindly confirm your attendance.
+                </p>
+
+                <div class="rsvp-seal-wrapper" onclick="openRsvpModal()">
+                    <div class="wax-seal-btn">
+                        <div class="wax-seal-inner">
                             <span class="seal-text">RSVP</span>
                             <div class="seal-ornament"></div>
                         </div>
@@ -133,110 +129,149 @@
                 </div>
 
                 <div class="rsvp-pointer-hint">
-                    <span class="chevron-arrow">▲</span>
+                    <span class="chevron-arrow">^</span>
                     <p class="click-to-open">Click to open</p>
                 </div>
 
                 <div class="rsvp-footer-closing">
-                    <p class="hope-see-you">Hope to see you there!</p>
+                    <h3 class="hope-see-you">Hope to see you there!</h3>
                     <p class="couple-signature">Sami and Taleen</p>
                 </div>
             </section>
+
         </div>
 
-        <!-- Bottom Couple Photo Section -->
         <section class="bottom-couple-section">
             <div class="couple-image-container">
-                <div class="top-gradient-overlay"></div>
                 <img src="couple.jpg" alt="Sami and Taleen" class="blended-couple-img">
+                <div class="top-gradient-overlay"></div>
             </div>
         </section>
 
-    </main>
+    </div>
 
-    <!-- Audio Player Toggle Button -->
-    <button id="audio-toggle" aria-label="Toggle Audio">🎵</button>
-
-    <!-- App Engine & Interactions -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const coverScreen = document.getElementById('cover-screen');
-            const envelopeTrigger = document.getElementById('envelope-trigger');
-            const videoOverlay = document.getElementById('video-overlay');
-            const transitionVideo = document.getElementById('transition-video');
-            const invitationScreen = document.getElementById('invitation-screen');
-
-            // 1. Image Click -> Play Video Transition Engine
-            envelopeTrigger.addEventListener('click', () => {
-                coverScreen.classList.add('fade-out');
-                setTimeout(() => {
-                    coverScreen.style.display = 'none';
-                    videoOverlay.classList.remove('hidden');
-                    videoOverlay.classList.add('fade-in');
-                    transitionVideo.play();
-                }, 400);
-            });
-
-            // Transition to main invitation when video ends
-            function revealInvitation() {
-                videoOverlay.classList.add('fade-out');
-                setTimeout(() => {
-                    videoOverlay.style.display = 'none';
-                    invitationScreen.classList.remove('hidden');
-                    invitationScreen.classList.add('fade-in');
-                    initScrollObserver();
-                }, 600);
-            }
-
-            transitionVideo.addEventListener('ended', revealInvitation);
+        // Start Experience
+        function startExperience() {
+            document.getElementById('cover-screen').style.display = 'none';
+            const videoScreen = document.getElementById('video-screen');
+            const video = document.getElementById('transition-video');
+            const music = document.getElementById('bg-music');
             
-            // Allow skipping video on tap
-            videoOverlay.addEventListener('click', () => {
-                transitionVideo.pause();
-                revealInvitation();
-            });
+            videoScreen.style.display = 'block';
+            video.play();
+            music.play().catch(() => {});
 
-            // 2. Scroll Animation Observer (Fade In Elements)
-            function initScrollObserver() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                        }
-                    });
-                }, { threshold: 0.15 });
-
-                document.querySelectorAll('.fade-in-line').forEach(el => observer.observe(el));
+            function revealInvitation() {
+                videoScreen.style.display = 'none';
+                const invScreen = document.getElementById('invitation-screen');
+                invScreen.style.display = 'block';
+                setTimeout(() => invScreen.classList.add('visible'), 50);
+                document.body.style.overflow = 'auto';
             }
 
-            // 3. Live Countdown Engine
-            const targetDate = new Date("November 20, 2026 19:00:00").getTime();
+            video.onended = revealInvitation;
 
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const difference = targetDate - now;
+            // Allow skipping video by clicking on video screen
+            videoScreen.onclick = function() {
+                video.pause();
+                revealInvitation();
+            };
+        }
 
-                if (difference > 0) {
-                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        // Scroll Animations for Countdown & Curtains
+        window.addEventListener('scroll', function() {
+            const section = document.getElementById('countdown-section');
+            const curtainLeft = document.getElementById('curtain-left');
+            const curtainRight = document.getElementById('curtain-right');
+            
+            if (section) {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top < windowHeight * 0.85) {
+                    section.classList.add('reveal-visible');
+                }
 
-                    document.getElementById("days").innerText = String(days).padStart(2, '0');
-                    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-                    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-                    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-                } else {
-                    document.getElementById("days").innerText = "00";
-                    document.getElementById("hours").innerText = "00";
-                    document.getElementById("minutes").innerText = "00";
-                    document.getElementById("seconds").innerText = "00";
+                if (curtainLeft && curtainRight && rect.top < windowHeight && rect.bottom > 0) {
+                    const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+                    const moveDistance = Math.min(Math.max(progress * 160 - 20, 0), 100); 
+                    
+                    curtainLeft.style.transform = `translateX(-${moveDistance}px)`;
+                    curtainRight.style.transform = `translateX(${moveDistance}px)`;
                 }
             }
-
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
         });
+
+        // Open RSVP Form Modal
+        function openRsvpModal() {
+            alert("RSVP Confirmation Form Opened");
+        }
+
+        // Toggle Background Music
+        function toggleAudio() {
+            const music = document.getElementById('bg-music');
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        // Countdown Timer to 20 November 2026
+        const weddingDate = new Date('November 20, 2026 19:00:00').getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance > 0) {
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+            }
+        }, 1000);
+
+        // Falling Petals Canvas Animation
+        const canvas = document.getElementById('petals-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = Array.from({ length: 25 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: Math.random() * 5 + 3,
+            speedY: Math.random() * 0.8 + 0.3,
+            speedX: Math.sin(Math.random()) * 0.5,
+            opacity: Math.random() * 0.6 + 0.2
+        }));
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                if (p.y > height) p.y = -10;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(162, 185, 200, ${p.opacity})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animatePetals);
+        }
+        animatePetals();
     </script>
 </body>
 </html>
