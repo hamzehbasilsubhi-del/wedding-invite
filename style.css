@@ -125,7 +125,7 @@ body, html {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px 20px 220px 20px; /* Shifted higher for optimal readability */
+    padding: 20px 20px 220px 20px;
 }
 
 .hero-banner-section::before {
@@ -155,14 +155,8 @@ body, html {
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .hero-subtitle {
@@ -176,7 +170,7 @@ body, html {
 }
 
 .hero-names {
-    font-family: 'Alex Brush', cursive; /* Elegant calligraphy font */
+    font-family: 'Alex Brush', cursive;
     font-size: 4.8rem;
     font-weight: 400;
     color: var(--text-burgundy);
@@ -228,20 +222,19 @@ body, html {
     overflow: hidden;
 }
 
-/* Staggered Fade In Effect for Card Items */
 .celebrate-card .fade-item {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.celebrate-card.animate-fade .fade-item:nth-child(3) { transition-delay: 0.1s; } /* Title */
-.celebrate-card.animate-fade .fade-item:nth-child(4) { transition-delay: 0.25s; } /* Divider */
-.celebrate-card.animate-fade .fade-item:nth-child(5) { transition-delay: 0.4s; } /* Text */
-.celebrate-card.animate-fade .fade-item:nth-child(6) { transition-delay: 0.55s; } /* Time & Location Title */
-.celebrate-card.animate-fade .fade-item:nth-child(7) { transition-delay: 0.7s; } /* Venue Name */
-.celebrate-card.animate-fade .fade-item:nth-child(8) { transition-delay: 0.85s; } /* Venue Region */
-.celebrate-card.animate-fade .fade-item:nth-child(9) { transition-delay: 1.0s; } /* Time */
+.celebrate-card.animate-fade .fade-item:nth-child(3) { transition-delay: 0.1s; }
+.celebrate-card.animate-fade .fade-item:nth-child(4) { transition-delay: 0.25s; }
+.celebrate-card.animate-fade .fade-item:nth-child(5) { transition-delay: 0.4s; }
+.celebrate-card.animate-fade .fade-item:nth-child(6) { transition-delay: 0.55s; }
+.celebrate-card.animate-fade .fade-item:nth-child(7) { transition-delay: 0.7s; }
+.celebrate-card.animate-fade .fade-item:nth-child(8) { transition-delay: 0.85s; }
+.celebrate-card.animate-fade .fade-item:nth-child(9) { transition-delay: 1.0s; }
 
 .celebrate-card.animate-fade .fade-item {
     opacity: 1;
@@ -472,7 +465,7 @@ body, html {
     margin-top: 8px;
 }
 
-/* RSVP Section */
+/* RSVP Section & Wax Seal Button Styling */
 .rsvp-custom-section {
     margin: 50px auto 10px auto;
     padding: 20px 10px 0px 10px;
@@ -497,7 +490,7 @@ body, html {
     font-weight: 400;
 }
 
-/* Light Blue Wax Seal Button */
+/* Realistic Wax Seal RSVP Button */
 .rsvp-seal-wrapper {
     display: flex;
     justify-content: center;
@@ -509,18 +502,18 @@ body, html {
 }
 
 .rsvp-seal-wrapper:hover {
-    transform: scale(1.06);
+    transform: scale(1.08);
 }
 
 .wax-seal-btn {
-    width: 120px;
-    height: 120px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #C2D7E5 0%, #A2B9C8 65%, #7D9AAE 100%);
+    background: radial-gradient(circle at 35% 35%, #C9DCE8 0%, #A2B9C8 60%, #7694A8 100%);
     box-shadow: 
-        0 10px 22px rgba(162, 185, 200, 0.45),
-        inset 0 2px 4px rgba(255, 255, 255, 0.6),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+        0 12px 25px rgba(162, 185, 200, 0.5),
+        inset 0 3px 6px rgba(255, 255, 255, 0.7),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -529,12 +522,12 @@ body, html {
 }
 
 .wax-seal-inner {
-    width: 88px;
-    height: 88px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    border: 1px dashed rgba(91, 44, 56, 0.4);
-    background: radial-gradient(circle at 40% 40%, #B4CADA 0%, #8FAABF 100%);
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px dashed rgba(91, 44, 56, 0.45);
+    background: radial-gradient(circle at 40% 40%, #B8CEE0 0%, #8FAABF 100%);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -544,11 +537,11 @@ body, html {
 
 .seal-text {
     font-family: 'Playfair Display', 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 600;
     color: var(--text-burgundy);
     letter-spacing: 2px;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .seal-ornament {
@@ -579,6 +572,129 @@ body, html {
     font-size: 1.8rem;
     color: var(--text-burgundy);
     margin: 0;
+}
+
+/* RSVP Modal Window Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: var(--bg-cream);
+    width: 90%;
+    max-width: 420px;
+    padding: 35px 30px;
+    border-radius: 12px;
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--text-burgundy);
+    cursor: pointer;
+}
+
+.modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    text-align: center;
+    color: var(--text-burgundy);
+    margin-bottom: 4px;
+}
+
+.modal-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-burgundy);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    background: #fff;
+    color: #333;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-gold);
+}
+
+.submit-rsvp-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--text-burgundy);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.submit-rsvp-btn:hover {
+    background: #3e1e26;
 }
 
 /* Closing Signature */

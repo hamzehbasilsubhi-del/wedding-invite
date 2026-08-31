@@ -117,7 +117,8 @@
                     kindly confirm your attendance.
                 </p>
 
-                <div class="rsvp-seal-wrapper" onclick="openRsvpModal()">
+                <!-- Wax Seal RSVP Button -->
+                <div class="rsvp-seal-wrapper" onclick="openRsvpModal()" role="button" aria-label="Confirm Attendance RSVP">
                     <div class="wax-seal-btn">
                         <div class="wax-seal-inner">
                             <span class="seal-text">RSVP</span>
@@ -148,17 +149,58 @@
 
     </div>
 
+    <!-- RSVP Modal Form Window -->
+    <div id="rsvp-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeRsvpModal()">&times;</button>
+            <h2 class="modal-title">RSVP</h2>
+            <p class="modal-subtitle">We would be honored by your presence</p>
+
+            <form id="rsvp-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="guest-name">Full Name</label>
+                    <input type="text" id="guest-name" placeholder="Your Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="attending-status">Will you attend?</label>
+                    <select id="attending-status" required>
+                        <option value="yes">Joyfully Accept</option>
+                        <option value="no">Regretfully Decline</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-count">Number of Guests</label>
+                    <input type="number" id="guest-count" min="1" max="10" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-note">Note / Message (Optional)</label>
+                    <textarea id="guest-note" rows="3" placeholder="Write a message to the couple..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-rsvp-btn">Confirm Reservation</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Start Experience
+        // Start Experience & Play Music
         function startExperience() {
+            const music = document.getElementById('bg-music');
+            if (music) {
+                music.play().catch(error => {
+                    console.log("Audio playback delayed by browser policy:", error);
+                });
+            }
+
             document.getElementById('cover-screen').style.display = 'none';
             const videoScreen = document.getElementById('video-screen');
             const video = document.getElementById('transition-video');
-            const music = document.getElementById('bg-music');
             
             videoScreen.style.display = 'block';
-            video.play();
-            music.play().catch(() => {});
+            if (video) video.play();
 
             function revealInvitation() {
                 videoScreen.style.display = 'none';
@@ -168,20 +210,47 @@
                 document.body.style.overflow = 'auto';
             }
 
-            video.onended = revealInvitation;
+            if (video) video.onended = revealInvitation;
 
-            // Allow skipping video by clicking on video screen
             videoScreen.onclick = function() {
-                video.pause();
+                if (video) video.pause();
                 revealInvitation();
             };
         }
 
-        // Scroll Animations for Celebrate Card, Countdown & Curtains
+        // Toggle Audio Button
+        function toggleAudio() {
+            const music = document.getElementById('bg-music');
+            if (music) {
+                if (music.paused) {
+                    music.play();
+                } else {
+                    music.pause();
+                }
+            }
+        }
+
+        // RSVP Modal Functions
+        function openRsvpModal() {
+            document.getElementById('rsvp-modal').classList.add('active');
+        }
+
+        function closeRsvpModal() {
+            document.getElementById('rsvp-modal').classList.remove('active');
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('guest-name').value;
+            alert(`Thank you ${name}! Your RSVP response has been submitted successfully.`);
+            closeRsvpModal();
+            document.getElementById('rsvp-form').reset();
+        }
+
+        // Scroll Animations
         window.addEventListener('scroll', function() {
             const windowHeight = window.innerHeight;
 
-            // Celebrate Card Staggered Fade In Animation
             const celebrateCard = document.getElementById('celebrate-card');
             if (celebrateCard) {
                 const rect = celebrateCard.getBoundingClientRect();
@@ -190,7 +259,6 @@
                 }
             }
 
-            // Countdown & Curtains Animation
             const section = document.getElementById('countdown-section');
             const curtainLeft = document.getElementById('curtain-left');
             const curtainRight = document.getElementById('curtain-right');
@@ -212,22 +280,7 @@
             }
         });
 
-        // Open RSVP Form Modal
-        function openRsvpModal() {
-            alert("RSVP Confirmation Form Opened");
-        }
-
-        // Toggle Background Music
-        function toggleAudio() {
-            const music = document.getElementById('bg-music');
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
-        }
-
-        // Countdown Timer to 20 November 2026
+        // Countdown Timer
         const weddingDate = new Date('November 20, 2026 19:00:00').getTime();
         setInterval(function() {
             const now = new Date().getTime();
@@ -246,7 +299,7 @@
             }
         }, 1000);
 
-        // Falling Petals Canvas Animation
+        // Falling Petals Canvas
         const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
