@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
     --bg-cream: #FAF8F5;
@@ -125,7 +125,7 @@ body, html {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px 20px 140px 20px; /* Raised content higher */
+    padding: 20px 20px 220px 20px; /* Shifted higher for optimal readability */
 }
 
 .hero-banner-section::before {
@@ -151,7 +151,7 @@ body, html {
     margin: 0 auto;
     color: var(--text-burgundy);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
-    animation: fadeIn 2s ease-in-out forwards; /* Fade effect for the hero text */
+    animation: fadeIn 2s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
@@ -176,7 +176,8 @@ body, html {
 }
 
 .hero-names {
-    font-size: 3.5rem;
+    font-family: 'Alex Brush', cursive; /* Elegant calligraphy font */
+    font-size: 4.8rem;
     font-weight: 400;
     color: var(--text-burgundy);
     line-height: 1.1;
@@ -185,9 +186,10 @@ body, html {
 
 .hero-names span {
     display: block;
-    font-size: 2.2rem;
+    font-size: 3rem;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    margin: 5px 0;
+    margin: -5px 0;
 }
 
 /* Flower Divider */
@@ -208,7 +210,7 @@ body, html {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
 }
 
-/* Celebrate Card */
+/* Celebrate Card & Staggered Line Animation */
 .celebrate-card-wrapper {
     max-width: 520px;
     margin: 30px auto 10px auto;
@@ -224,6 +226,26 @@ body, html {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
     overflow: hidden;
+}
+
+/* Staggered Fade In Effect for Card Items */
+.celebrate-card .fade-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.celebrate-card.animate-fade .fade-item:nth-child(3) { transition-delay: 0.1s; } /* Title */
+.celebrate-card.animate-fade .fade-item:nth-child(4) { transition-delay: 0.25s; } /* Divider */
+.celebrate-card.animate-fade .fade-item:nth-child(5) { transition-delay: 0.4s; } /* Text */
+.celebrate-card.animate-fade .fade-item:nth-child(6) { transition-delay: 0.55s; } /* Time & Location Title */
+.celebrate-card.animate-fade .fade-item:nth-child(7) { transition-delay: 0.7s; } /* Venue Name */
+.celebrate-card.animate-fade .fade-item:nth-child(8) { transition-delay: 0.85s; } /* Venue Region */
+.celebrate-card.animate-fade .fade-item:nth-child(9) { transition-delay: 1.0s; } /* Time */
+
+.celebrate-card.animate-fade .fade-item {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .side-border-img {

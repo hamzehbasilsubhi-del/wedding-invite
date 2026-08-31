@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation - Laith & Marleen</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
 </head>
 <body>
 
@@ -45,18 +45,18 @@
         </div>
 
         <section class="celebrate-card-wrapper">
-            <div class="celebrate-card">
+            <div class="celebrate-card" id="celebrate-card">
                 <div class="side-border-img left"></div>
                 <div class="side-border-img right"></div>
 
-                <h2 class="celebrate-title">Join Us To Celebrate<br>Our Wedding</h2>
-                <div class="celebrate-divider-line"></div>
-                <p class="celebrate-text">We are so excited to celebrate this<br>special day with you.</p>
+                <h2 class="celebrate-title fade-item">Join Us To Celebrate<br>Our Wedding</h2>
+                <div class="celebrate-divider-line fade-item"></div>
+                <p class="celebrate-text fade-item">We are so excited to celebrate this<br>special day with you.</p>
 
-                <h3 class="celebrate-location-title">Time & Location</h3>
-                <p class="celebrate-venue-name">Voco Riyadh Banquet Hall,</p>
-                <p class="celebrate-venue-region">An Namudhajiyah, Saudi Arabia, Riyadh</p>
-                <p class="celebrate-time">7:00 PM</p>
+                <h3 class="celebrate-location-title fade-item">Time & Location</h3>
+                <p class="celebrate-venue-name fade-item">Voco Riyadh Banquet Hall,</p>
+                <p class="celebrate-venue-region fade-item">An Namudhajiyah, Saudi Arabia, Riyadh</p>
+                <p class="celebrate-time fade-item">7:00 PM</p>
             </div>
         </section>
 
@@ -177,15 +177,26 @@
             };
         }
 
-        // Scroll Animations for Countdown & Curtains
+        // Scroll Animations for Celebrate Card, Countdown & Curtains
         window.addEventListener('scroll', function() {
+            const windowHeight = window.innerHeight;
+
+            // Celebrate Card Staggered Fade In Animation
+            const celebrateCard = document.getElementById('celebrate-card');
+            if (celebrateCard) {
+                const rect = celebrateCard.getBoundingClientRect();
+                if (rect.top < windowHeight * 0.85) {
+                    celebrateCard.classList.add('animate-fade');
+                }
+            }
+
+            // Countdown & Curtains Animation
             const section = document.getElementById('countdown-section');
             const curtainLeft = document.getElementById('curtain-left');
             const curtainRight = document.getElementById('curtain-right');
             
             if (section) {
                 const rect = section.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
                 
                 if (rect.top < windowHeight * 0.85) {
                     section.classList.add('reveal-visible');
