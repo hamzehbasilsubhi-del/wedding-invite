@@ -12,7 +12,7 @@
     <canvas id="petals-canvas"></canvas>
 
     <button id="audio-toggle" onclick="toggleAudio()" aria-label="Toggle Audio">🎵</button>
-    <audio id="bg-music" src="music.mp3" loop></audio>
+    <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
     <!-- Cover Screen -->
     <div id="cover-screen" class="screen">
@@ -177,12 +177,15 @@
     </div>
 
     <script>
-        // Start Experience & Play Music
+        // Start Experience & Play Music on Touch
         function startExperience() {
             const music = document.getElementById('bg-music');
             if (music) {
-                music.play().catch(error => {
-                    console.log("Audio playback delayed by browser policy:", error);
+                music.muted = false;
+                music.play().then(() => {
+                    console.log("Audio playing");
+                }).catch(error => {
+                    console.log("Audio playback error:", error);
                 });
             }
 
@@ -191,7 +194,7 @@
             const video = document.getElementById('transition-video');
             
             videoScreen.style.display = 'block';
-            if (video) video.play();
+            if (video) video.play().catch(e => console.log(e));
 
             function revealInvitation() {
                 videoScreen.style.display = 'none';
