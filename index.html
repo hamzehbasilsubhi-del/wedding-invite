@@ -197,7 +197,6 @@
                 setTimeout(() => invScreen.classList.add('visible'), 50);
                 document.body.style.overflow = 'auto';
                 
-                // Initialize Intersection Observers after content is visible
                 initScrollObservers();
             }
 
@@ -276,15 +275,15 @@
             type();
         }
 
-        // Modern High-Precision Intersection Observer Initialization
+        // Intersection Observers Configuration
         function initScrollObservers() {
             const observerOptions = {
                 root: null,
                 rootMargin: '0px 0px -10% 0px',
-                threshold: 0.2
+                threshold: 0.25
             };
 
-            // 1. Celebrate Card Observer
+            // Celebrate Card Observer
             const celebrateCard = document.getElementById('celebrate-card');
             if (celebrateCard) {
                 const celebrateObserver = new IntersectionObserver((entries, observer) => {
@@ -298,7 +297,7 @@
                 celebrateObserver.observe(celebrateCard);
             }
 
-            // 2. Countdown Curtains Observer
+            // Countdown Curtains Observer
             const countdownSection = document.getElementById('countdown-section');
             if (countdownSection) {
                 const countdownObserver = new IntersectionObserver((entries, observer) => {
@@ -313,7 +312,7 @@
                 countdownObserver.observe(countdownSection);
             }
 
-            // 3. Typewriter Observer
+            // Typewriter Observer
             const rsvpFooter = document.getElementById('rsvp-footer-closing');
             if (rsvpFooter) {
                 let rsvpTyped = false;
@@ -351,7 +350,7 @@
             }
         }, 1000);
 
-        // Falling Petals Canvas
+        // Canvas Petals Animation
         const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
