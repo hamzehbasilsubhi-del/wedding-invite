@@ -375,6 +375,7 @@ body, html {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M50 0 C40 12, 35 12, 0 12 C15 12, 25 18, 50 4 C75 18, 85 12, 100 12 C65 12, 60 12, 50 0 Z' fill='%23C5A059'/%3E%3Ccircle cx='50' cy='3' r='2.5' fill='%235B2C38'/%3E%3C/svg%3E");
 }
 
+/* Countdown Section & Curtain Animation Improvements */
 .countdown-section-wrapper {
     position: relative;
     overflow: hidden;
@@ -382,7 +383,7 @@ body, html {
     margin: 30px 0 10px 0;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .countdown-section-wrapper.reveal-visible {
@@ -399,11 +400,30 @@ body, html {
     pointer-events: none;
     background-size: contain;
     background-repeat: no-repeat;
-    transition: transform 0.1s ease-out;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.curtain-left { left: 0; background-image: url('curtain-left.png'); background-position: left center; }
-.curtain-right { right: 0; background-image: url('curtain-right.png'); background-position: right center; }
+.curtain-left { 
+    left: 0; 
+    background-image: url('curtain-left.png'); 
+    background-position: left center; 
+    transform: translateX(0);
+}
+.curtain-right { 
+    right: 0; 
+    background-image: url('curtain-right.png'); 
+    background-position: right center; 
+    transform: translateX(0);
+}
+
+/* Opening curtains when section enters viewport */
+.countdown-section-wrapper.curtains-open .curtain-left {
+    transform: translateX(-80px);
+}
+
+.countdown-section-wrapper.curtains-open .curtain-right {
+    transform: translateX(80px);
+}
 
 .countdown-container {
     display: flex;
@@ -670,14 +690,13 @@ body, html {
     margin-bottom: 10px;
 }
 
-/* Typewriter styles for smooth layout */
 .hope-see-you {
     font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
     font-size: 3rem;
     color: var(--text-burgundy);
     font-weight: 400;
     margin-bottom: 8px;
-    min-height: 1.2em; /* Prevents shifting while empty */
+    min-height: 1.2em;
 }
 
 .couple-signature {
@@ -686,10 +705,9 @@ body, html {
     color: var(--text-burgundy);
     letter-spacing: 0.5px;
     font-weight: 400;
-    min-height: 1.2em; /* Prevents shifting while empty */
+    min-height: 1.2em;
 }
 
-/* Blinking typing cursor */
 .typing-cursor::after {
     content: '|';
     animation: blink 0.7s step-end infinite;

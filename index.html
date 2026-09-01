@@ -128,7 +128,6 @@
                 </div>
 
                 <div class="rsvp-footer-closing" id="rsvp-footer-closing">
-                    <!-- Text removed from here and placed in data-text for Typewriter effect -->
                     <h3 class="hope-see-you" id="type-hope" data-text="Hope to see you there!"></h3>
                     <p class="couple-signature" id="type-names" data-text="Laith and Marleen"></p>
                 </div>
@@ -197,6 +196,9 @@
                 invScreen.style.display = 'block';
                 setTimeout(() => invScreen.classList.add('visible'), 50);
                 document.body.style.overflow = 'auto';
+                
+                // Initialize Intersection Observers after content is visible
+                initScrollObservers();
             }
 
             if (video) {
@@ -255,6 +257,7 @@
         // Typewriter Effect Function
         function startTypewriter(elementId, speed, callback) {
             const el = document.getElementById(elementId);
+            if (!el) return;
             const text = el.getAttribute('data-text');
             el.innerHTML = '';
             el.classList.add('typing-cursor');
@@ -267,58 +270,67 @@
                     setTimeout(type, speed);
                 } else {
                     el.classList.remove('typing-cursor');
-                    if (callback) setTimeout(callback, 400); // Wait a bit before starting next text
+                    if (callback) setTimeout(callback, 400);
                 }
             }
             type();
         }
 
-        let rsvpTyped = false;
+        // Modern High-Precision Intersection Observer Initialization
+        function initScrollObservers() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.2
+            };
 
-        window.addEventListener('scroll', function() {
-            const windowHeight = window.innerHeight;
-
-            // Fade Animations
+            // 1. Celebrate Card Observer
             const celebrateCard = document.getElementById('celebrate-card');
             if (celebrateCard) {
-                const rect = celebrateCard.getBoundingClientRect();
-                if (rect.top < windowHeight * 0.85) {
-                    celebrateCard.classList.add('animate-fade');
-                }
-            }
-
-            // Curtain Animation
-            const section = document.getElementById('countdown-section');
-            const curtainLeft = document.getElementById('curtain-left');
-            const curtainRight = document.getElementById('curtain-right');
-            
-            if (section) {
-                const rect = section.getBoundingClientRect();
-                if (rect.top < windowHeight * 0.85) {
-                    section.classList.add('reveal-visible');
-                }
-                if (curtainLeft && curtainRight && rect.top < windowHeight && rect.bottom > 0) {
-                    const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const moveDistance = Math.min(Math.max(progress * 160 - 20, 0), 100); 
-                    curtainLeft.style.transform = `translateX(-${moveDistance}px)`;
-                    curtainRight.style.transform = `translateX(${moveDistance}px)`;
-                }
-            }
-
-            // Trigger Typewriter when RSVP footer is visible
-            const rsvpFooter = document.getElementById('rsvp-footer-closing');
-            if (rsvpFooter && !rsvpTyped) {
-                const rect = rsvpFooter.getBoundingClientRect();
-                // Trigger when the section is well within view
-                if (rect.top < windowHeight * 0.95 && rect.bottom > 0) {
-                    rsvpTyped = true;
-                    // Type first sentence, then trigger second sentence
-                    startTypewriter('type-hope', 70, () => {
-                        startTypewriter('type-names', 80);
+                const celebrateObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            celebrateCard.classList.add('animate-fade');
+                            observer.unobserve(entry.target);
+                        }
                     });
-                }
+                }, observerOptions);
+                celebrateObserver.observe(celebrateCard);
             }
-        });
+
+            // 2. Countdown Curtains Observer
+            const countdownSection = document.getElementById('countdown-section');
+            if (countdownSection) {
+                const countdownObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            countdownSection.classList.add('reveal-visible');
+                            countdownSection.classList.add('curtains-open');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                countdownObserver.observe(countdownSection);
+            }
+
+            // 3. Typewriter Observer
+            const rsvpFooter = document.getElementById('rsvp-footer-closing');
+            if (rsvpFooter) {
+                let rsvpTyped = false;
+                const rsvpObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !rsvpTyped) {
+                            rsvpTyped = true;
+                            startTypewriter('type-hope', 70, () => {
+                                startTypewriter('type-names', 80);
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                rsvpObserver.observe(rsvpFooter);
+            }
+        }
 
         // Countdown Timer
         const weddingDate = new Date('November 20, 2026 19:00:00').getTime();
