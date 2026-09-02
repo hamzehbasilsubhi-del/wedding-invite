@@ -14,19 +14,29 @@
     <button id="audio-toggle" onclick="toggleAudio()" aria-label="Toggle Audio">🎵</button>
     <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
-    <!-- Cover Screen -->
     <div id="cover-screen" class="screen">
-        <button id="seal-button" onclick="startExperience()" aria-label="Open Invitation"></button>
+        <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+            <div class="envelope-back"></div>
+            
+            <div class="envelope-flap" id="envelope-flap">
+                <div class="wax-seal" id="wax-seal">
+                    <span class="seal-initials">L&M</span>
+                </div>
+            </div>
+
+            <div class="envelope-card" id="envelope-card">
+                <div class="card-preview-content">
+                    <p class="preview-subtitle">THE WEDDING OF</p>
+
+                    <h2 class="preview-names">Laith & Marleen</h2>
+                </div>
+            </div>
+
+            <div class="envelope-front"></div>
+            <p class="click-hint">Tap Envelope to Open</p>
+        </div>
     </div>
 
-    <!-- Video Transition Screen -->
-    <div id="video-screen" class="screen">
-        <video id="transition-video" playsinline preload="auto">
-            <source src="transition.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <!-- Invitation Main Screen -->
     <div id="invitation-screen" class="screen">
         
         <header class="hero-banner-section">
@@ -112,7 +122,6 @@
                     kindly confirm your attendance.
                 </p>
 
-                <!-- Wax Seal RSVP Button -->
                 <div class="rsvp-seal-wrapper" onclick="openRsvpModal()" role="button" aria-label="Confirm Attendance RSVP">
                     <div class="wax-seal-btn">
                         <div class="wax-seal-inner">
@@ -144,10 +153,9 @@
 
     </div>
 
-    <!-- RSVP Modal Form Window (English) -->
     <div id="rsvp-modal" class="modal-overlay">
         <div class="modal-card">
-            <button class="modal-close-btn" onclick="closeRsvpModal()">&times;</button>
+            <button class="modal-close-btn" onclick="closeRsvpModal()">×</button>
             <h2 class="modal-title">RSVP</h2>
             <p class="modal-subtitle">We would be honored by your presence</p>
 
@@ -177,63 +185,52 @@
     </div>
 
     <script>
-        function startExperience() {
-            const music = document.getElementById('bg-music');
-            const coverScreen = document.getElementById('cover-screen');
-            const videoScreen = document.getElementById('video-screen');
-            const video = document.getElementById('transition-video');
-            const invScreen = document.getElementById('invitation-screen');
+        let isOpened = false;
 
+        function openEnvelope() {
+            if (isOpened) return;
+            isOpened = true;
+
+            const music = document.getElementById('bg-music');
             if (music) {
                 music.muted = false;
-                music.play().catch(error => console.log("Audio play error:", error));
+                music.play().catch(e => console.log("Audio play error:", e));
             }
 
-            videoScreen.style.display = 'block';
+            const envelope = document.getElementById('envelope');
+            const coverScreen = document.getElementById('cover-screen');
+            const invScreen = document.getElementById('invitation-screen');
 
-            function revealInvitation() {
-                videoScreen.style.display = 'none';
+            // 1. Open Flap & Break Seal
+            envelope.classList.add('open');
+
+            // 2. Slide Card Out after Flap opens
+            setTimeout(() => {
+                envelope.classList.add('card-out');
+            }, 800);
+
+            // 3. Smooth Fade to Invitation Screen
+            setTimeout(() => {
+                coverScreen.style.opacity = '0';
+                coverScreen.style.transition = 'opacity 1s ease';
+                
                 invScreen.style.display = 'block';
                 setTimeout(() => invScreen.classList.add('visible'), 50);
                 document.body.style.overflow = 'auto';
                 
                 initScrollObservers();
-            }
+            }, 2200);
 
-            if (video) {
-                video.muted = false;
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        coverScreen.style.display = 'none';
-                    }).catch(err => {
-                        console.log("Video play error:", err);
-                        coverScreen.style.display = 'none';
-                        revealInvitation(); 
-                    });
-                } else {
-                    coverScreen.style.display = 'none';
-                }
-                video.onended = revealInvitation;
-            } else {
+            setTimeout(() => {
                 coverScreen.style.display = 'none';
-                revealInvitation();
-            }
-
-            videoScreen.onclick = function() {
-                if (video) video.pause();
-                revealInvitation();
-            };
+            }, 3200);
         }
 
         function toggleAudio() {
             const music = document.getElementById('bg-music');
             if (music) {
-                if (music.paused) {
-                    music.play();
-                } else {
-                    music.pause();
-                }
+                if (music.paused) music.play();
+                else music.pause();
             }
         }
 
@@ -253,7 +250,6 @@
             document.getElementById('rsvp-form').reset();
         }
 
-        // Typewriter Effect Function
         function startTypewriter(elementId, speed, callback) {
             const el = document.getElementById(elementId);
             if (!el) return;
@@ -275,7 +271,6 @@
             type();
         }
 
-        // Intersection Observers Configuration
         function initScrollObservers() {
             const observerOptions = {
                 root: null,
@@ -283,7 +278,6 @@
                 threshold: 0.25
             };
 
-            // Celebrate Card Observer
             const celebrateCard = document.getElementById('celebrate-card');
             if (celebrateCard) {
                 const celebrateObserver = new IntersectionObserver((entries, observer) => {
@@ -297,7 +291,6 @@
                 celebrateObserver.observe(celebrateCard);
             }
 
-            // Countdown Curtains Observer
             const countdownSection = document.getElementById('countdown-section');
             if (countdownSection) {
                 const countdownObserver = new IntersectionObserver((entries, observer) => {
@@ -312,7 +305,6 @@
                 countdownObserver.observe(countdownSection);
             }
 
-            // Typewriter Observer
             const rsvpFooter = document.getElementById('rsvp-footer-closing');
             if (rsvpFooter) {
                 let rsvpTyped = false;
@@ -331,7 +323,6 @@
             }
         }
 
-        // Countdown Timer
         const weddingDate = new Date('November 20, 2026 19:00:00').getTime();
         setInterval(function() {
             const now = new Date().getTime();
@@ -350,7 +341,6 @@
             }
         }, 1000);
 
-        // Canvas Petals Animation
         const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
